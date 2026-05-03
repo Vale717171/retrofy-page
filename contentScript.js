@@ -557,14 +557,24 @@
     }
 
     try {
-      return new URL(trimmedValue).href;
+      return getSafeWebUrl(trimmedValue);
     } catch {
       try {
-        return new URL(`https://${trimmedValue}`).href;
+        return getSafeWebUrl(`https://${trimmedValue}`);
       } catch {
         return "";
       }
     }
+  }
+
+  function getSafeWebUrl(value) {
+    const url = new URL(value);
+
+    if (!["http:", "https:"].includes(url.protocol)) {
+      return "";
+    }
+
+    return url.href;
   }
 
   function updateBrowserStatus(message) {
