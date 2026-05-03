@@ -128,6 +128,10 @@ html.retrofy-page-active iframe {
   box-shadow: none !important;
 }
 
+html.retrofy-page-active:not(.retrofy-mode-pure-html) body img {
+  filter: url("#retrofy-page-posterize") contrast(1.06) brightness(1.02) saturate(0.88) !important;
+}
+
 html.retrofy-page-active table,
 html.retrofy-page-active article,
 html.retrofy-page-active aside,
@@ -169,6 +173,13 @@ html.retrofy-page-active #retrofy-page-chrome {
 
 html.retrofy-page-active #retrofy-page-effects {
   pointer-events: none !important;
+}
+
+html.retrofy-page-active .retrofy-page-filter-defs {
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }
 
 html.retrofy-page-active .retrofy-page-crt,
@@ -343,6 +354,7 @@ html.retrofy-page-active.retrofy-mode-chaos a {
 
 html.retrofy-page-active.retrofy-mode-chaos img {
   border: 5px ridge #00ff00 !important;
+  filter: url("#retrofy-page-posterize") contrast(1.25) brightness(1.08) saturate(1.35) !important;
 }
 
 html.retrofy-page-active.retrofy-mode-pure-html body,

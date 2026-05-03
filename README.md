@@ -23,6 +23,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 - Retro Browser controls navigate the current tab. After a full page load, reopen Retro Browser from the popup if the frame is gone.
 - Windows 95 Desktop opens a draggable and resizable fake desktop window with a snapshot of the current page inside.
 - Extra retro effects include CRT scanlines, pixel-style cursors, mouse sparkles, marquee/blink text, rainbow headings, and CSS pixel-art under construction flair.
+- Images get a subtle SVG posterize filter for a 256-color-era look without making photos unreadable.
 - `Retrofy this page` plays a short inline 56k-style dial-up sound with no external audio request.
 - A fake `Loading... 28.8 kbps` overlay appears before applying retro mode.
 - `Export as .htm` downloads a standalone retro-styled HTML snapshot of the current page.

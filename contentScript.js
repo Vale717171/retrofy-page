@@ -200,10 +200,7 @@
     const effects = document.createElement("div");
     effects.id = effectsId;
     effects.setAttribute("aria-hidden", "true");
-    effects.innerHTML = `
-      <div class="retrofy-page-crt"></div>
-      <div class="retrofy-page-crt-flicker"></div>
-    `;
+    effects.innerHTML = getRetroEffectsMarkup();
 
     document.body.append(effects);
   }
@@ -249,11 +246,24 @@
     const effects = document.createElement("div");
     effects.id = effectsId;
     effects.setAttribute("aria-hidden", "true");
-    effects.innerHTML = `
+    effects.innerHTML = getRetroEffectsMarkup();
+    body.append(effects);
+  }
+
+  function getRetroEffectsMarkup() {
+    return `
+      <svg class="retrofy-page-filter-defs" width="0" height="0" aria-hidden="true" focusable="false">
+        <filter id="retrofy-page-posterize" color-interpolation-filters="sRGB">
+          <feComponentTransfer>
+            <feFuncR type="discrete" tableValues="0 0.2 0.4 0.6 0.8 1"></feFuncR>
+            <feFuncG type="discrete" tableValues="0 0.2 0.4 0.6 0.8 1"></feFuncG>
+            <feFuncB type="discrete" tableValues="0 0.2 0.4 0.6 0.8 1"></feFuncB>
+          </feComponentTransfer>
+        </filter>
+      </svg>
       <div class="retrofy-page-crt"></div>
       <div class="retrofy-page-crt-flicker"></div>
     `;
-    body.append(effects);
   }
 
   function addRetroBrowser(pageUrl) {
@@ -355,6 +365,7 @@
       clone.querySelector(`#${effectsId}`)?.remove();
     } else {
       ensureExportChrome(clone, snapshotMode);
+      ensureExportEffects(clone);
     }
 
     let head = clone.querySelector("head");
