@@ -34,11 +34,6 @@ exportButton?.addEventListener("click", () => runOnActiveTab("export"));
 real90sButton?.addEventListener("click", openReal90sPage);
 removeButton?.addEventListener("click", () => runOnActiveTab("disable"));
 
-async function loadAudio() {
-  const response = await fetch(chrome.runtime.getURL("assets/dialup.wav"));
-  return response.text();
-}
-
 async function runOnActiveTab(action) {
   setStatus(getLoadingMessage(action));
   setButtonsDisabled(true);
@@ -54,7 +49,9 @@ async function runOnActiveTab(action) {
       throw new Error("Chrome does not allow extensions to change this kind of page. Try Retrofy Page on a normal website.");
     }
 
-    const audio = action === "enable" ? await loadAudio() : "";
+    // Resolve the local extension URL for the dial-up sound once; the content
+    // script receives only this URL string — no binary data is transferred.
+    const audioUrl = action === "enable" ? chrome.runtime.getURL("assets/dialup.wav") : "";
 
     if (action === "enable" || action === "browser" || action === "desktop") {
       await ensureRetrofyCss(tab.id);
@@ -69,10 +66,10 @@ async function runOnActiveTab(action) {
 
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      args: [action, tab.url, getSelectedMode(), retrofyCss, audio],
-      func: (requestedAction, pageUrl, mode, cssText, audioData) => {
-        if (audioData) {
-          window.retrofyAudioData = audioData;
+      args: [action, tab.url, getSelectedMode(), retrofyCss, audioUrl],
+      func: (requestedAction, pageUrl, mode, cssText, resolvedAudioUrl) => {
+        if (resolvedAudioUrl) {
+          window.retrofyAudioUrl = resolvedAudioUrl;
         }
         return window.retrofyPage?.[requestedAction]?.(pageUrl, mode, cssText);
       }
