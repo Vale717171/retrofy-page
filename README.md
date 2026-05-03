@@ -64,6 +64,7 @@ Retrofy Page does not track users, collect data, call a backend, or load externa
 - `background.js` removes injected CSS when Retro Browser is closed from inside the page.
 - `contentScript.js` toggles page state, small retro decorations, and the Retro Browser frame.
 - `retrofy.css` contains the reversible visual treatment.
+- `assets/` contains the extension icons.
 
 ## Modes
 
