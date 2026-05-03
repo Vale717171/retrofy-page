@@ -1,14 +1,16 @@
 const retrofyButton = document.getElementById("retrofyButton");
+const retroBrowserButton = document.getElementById("retroBrowserButton");
 const removeButton = document.getElementById("removeButton");
 const statusEl = document.getElementById("status");
 
 const restrictedProtocols = ["chrome:", "edge:", "about:", "brave:", "opera:", "vivaldi:"];
 
 retrofyButton.addEventListener("click", () => runOnActiveTab("enable"));
+retroBrowserButton.addEventListener("click", () => runOnActiveTab("browser"));
 removeButton.addEventListener("click", () => runOnActiveTab("disable"));
 
 async function runOnActiveTab(action) {
-  setStatus(action === "enable" ? "Retrofying this page..." : "Removing retro mode...");
+  setStatus(getLoadingMessage(action));
   setButtonsDisabled(true);
 
   try {
@@ -22,7 +24,7 @@ async function runOnActiveTab(action) {
       throw new Error("Chrome does not allow extensions to change this kind of page. Try Retrofy Page on a normal website.");
     }
 
-    if (action === "enable") {
+    if (action === "enable" || action === "browser") {
       await chrome.scripting.insertCSS({
         target: { tabId: tab.id },
         files: ["retrofy.css"]
@@ -36,13 +38,13 @@ async function runOnActiveTab(action) {
 
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      args: [action],
-      func: (requestedAction) => {
-        window.retrofyPage?.[requestedAction]?.();
+      args: [action, tab.url],
+      func: (requestedAction, pageUrl) => {
+        window.retrofyPage?.[requestedAction]?.(pageUrl);
       }
     });
 
-    setStatus(action === "enable" ? "Retro mode is on. Welcome back to the dial-up era." : "Retro mode removed.");
+    setStatus(getSuccessMessage(action));
   } catch (error) {
     setStatus(error.message || "Retrofy Page could not change this page.");
   } finally {
@@ -65,5 +67,22 @@ function setStatus(message) {
 
 function setButtonsDisabled(isDisabled) {
   retrofyButton.disabled = isDisabled;
+  retroBrowserButton.disabled = isDisabled;
   removeButton.disabled = isDisabled;
+}
+
+function getLoadingMessage(action) {
+  if (action === "browser") {
+    return "Opening Retro Browser...";
+  }
+
+  return action === "enable" ? "Retrofying this page..." : "Removing retro mode...";
+}
+
+function getSuccessMessage(action) {
+  if (action === "browser") {
+    return "Retro Browser is open. Very serious 1999 technology.";
+  }
+
+  return action === "enable" ? "Retro mode is on. Welcome back to the dial-up era." : "Retro mode removed.";
 }

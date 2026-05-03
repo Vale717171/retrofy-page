@@ -160,10 +160,127 @@ html.retrofy-page-active .retrofy-page-corner strong {
   color: #cc0000 !important;
 }
 
+html.retrofy-browser-active body {
+  padding-top: 178px !important;
+  padding-bottom: 26px !important;
+}
+
+html.retrofy-browser-active #retrofy-browser-frame {
+  display: block !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+  z-index: 2147483647 !important;
+  margin: 0 !important;
+  padding: 3px !important;
+  border: 2px outset #ffffff !important;
+  color: #000000 !important;
+  background: #c0c0c0 !important;
+  box-shadow: none !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  line-height: 1.2 !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-titlebar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  min-height: 24px !important;
+  padding: 3px 6px !important;
+  color: #ffffff !important;
+  background: #000080 !important;
+  font: 700 13px Arial, Helvetica, sans-serif !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-window-buttons {
+  color: #ffffff !important;
+  font-family: "Courier New", Courier, monospace !important;
+  white-space: nowrap !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-menubar {
+  padding: 5px 6px !important;
+  border-right: 2px inset #ffffff !important;
+  border-bottom: 2px inset #ffffff !important;
+  border-left: 2px inset #ffffff !important;
+  background: #c0c0c0 !important;
+  font: 13px Arial, Helvetica, sans-serif !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-toolbar {
+  display: flex !important;
+  gap: 5px !important;
+  padding: 6px !important;
+  border-bottom: 2px inset #ffffff !important;
+  background: #d0d0d0 !important;
+  overflow-x: auto !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-toolbar span {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 64px !important;
+  min-height: 28px !important;
+  padding: 4px 8px !important;
+  border: 2px outset #ffffff !important;
+  border-radius: 0 !important;
+  color: #000000 !important;
+  background: #dcdcdc !important;
+  font: 12px Arial, Helvetica, sans-serif !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-address {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) !important;
+  gap: 6px !important;
+  align-items: center !important;
+  padding: 6px !important;
+  border-bottom: 2px inset #ffffff !important;
+  background: #c0c0c0 !important;
+  font: 12px Arial, Helvetica, sans-serif !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-address input {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 24px !important;
+  padding: 2px 4px !important;
+  border: 2px inset #ffffff !important;
+  border-radius: 0 !important;
+  color: #000000 !important;
+  background: #ffffff !important;
+  font: 12px "Courier New", Courier, monospace !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-status {
+  position: fixed !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 2147483647 !important;
+  height: 24px !important;
+  padding: 4px 8px !important;
+  border: 2px inset #ffffff !important;
+  color: #000000 !important;
+  background: #c0c0c0 !important;
+  font: 12px Arial, Helvetica, sans-serif !important;
+}
+
 @media (max-width: 620px) {
   html.retrofy-page-active .retrofy-page-corner {
     position: static !important;
     width: auto !important;
     margin: 8px !important;
+  }
+
+  html.retrofy-browser-active body {
+    padding-top: 208px !important;
+  }
+
+  html.retrofy-browser-active .retrofy-browser-toolbar span {
+    min-width: 58px !important;
   }
 }

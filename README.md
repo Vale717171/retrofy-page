@@ -9,8 +9,8 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 - Manifest V3 Chrome extension.
 - Toolbar popup with:
   - `Retrofy this page`
+  - `Open Retro Browser`
   - `Remove retro mode`
-  - disabled `Retro Browser – coming soon` placeholder
   - `Support the project` footer link
 - Injects CSS and JavaScript only into the active tab after a button click.
 - Uses a single root class: `retrofy-page-active`.
@@ -33,10 +33,12 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 2. Click the Retrofy Page toolbar icon.
 3. Click `Retrofy this page`.
 4. Confirm the page switches to a 1990s-style look.
-5. Click `Remove retro mode`.
-6. Confirm the page returns to normal.
-7. Open a restricted page such as `chrome://extensions`.
-8. Click `Retrofy this page` and confirm the popup shows a friendly error.
+5. Click `Open Retro Browser`.
+6. Confirm the page gets a retro browser frame with a fake toolbar and address bar.
+7. Click `Remove retro mode`.
+8. Confirm the page returns to normal.
+9. Open a restricted page such as `chrome://extensions`.
+10. Click `Retrofy this page` and confirm the popup shows a friendly error.
 
 ## Privacy
 
@@ -48,14 +50,13 @@ Retrofy Page does not track users, collect data, call a backend, or load externa
 - `popup.html` renders the toolbar popup.
 - `popup.css` styles the popup.
 - `popup.js` handles popup actions and active-tab injection.
-- `contentScript.js` toggles page state and small retro decorations.
+- `contentScript.js` toggles page state, small retro decorations, and the Retro Browser frame.
 - `retrofy.css` contains the reversible visual treatment.
 
 ## Future modes
 
-The MVP is intentionally small, but the structure can later support modes such as:
+The MVP is intentionally small, but the structure can later support more modes such as:
 
 - Soft 90s
 - Geocities Chaos
 - Pure HTML
-- Retro Browser
