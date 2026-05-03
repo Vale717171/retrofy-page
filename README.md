@@ -1,0 +1,61 @@
+# Retrofy Page
+
+Retrofy Page is a lightweight, privacy-friendly Chrome Extension that turns the current webpage into a funny late-1990s-style version.
+
+This is an MVP. It does not include analytics, a backend, external requests, or a build system.
+
+## Features
+
+- Manifest V3 Chrome extension.
+- Toolbar popup with:
+  - `Retrofy this page`
+  - `Remove retro mode`
+  - disabled `Retro Browser – coming soon` placeholder
+  - `Support the project` footer link
+- Injects CSS and JavaScript only into the active tab after a button click.
+- Uses a single root class: `retrofy-page-active`.
+- Reversible effect.
+- Friendly errors on restricted pages such as `chrome://extensions`.
+- Works best on ordinary pages such as Wikipedia, blogs, news articles, and simple company pages.
+
+## Install locally
+
+1. Open Chrome.
+2. Go to `chrome://extensions`.
+3. Enable `Developer mode`.
+4. Click `Load unpacked`.
+5. Select this folder.
+6. Pin `Retrofy Page` from the extensions menu if you want quick access.
+
+## Test locally
+
+1. Open an ordinary website, for example `https://en.wikipedia.org/wiki/World_Wide_Web`.
+2. Click the Retrofy Page toolbar icon.
+3. Click `Retrofy this page`.
+4. Confirm the page switches to a 1990s-style look.
+5. Click `Remove retro mode`.
+6. Confirm the page returns to normal.
+7. Open a restricted page such as `chrome://extensions`.
+8. Click `Retrofy this page` and confirm the popup shows a friendly error.
+
+## Privacy
+
+Retrofy Page does not track users, collect data, call a backend, or load external scripts. The only external URL is the visible `Support the project` link in the popup footer, which opens only when clicked.
+
+## Project structure
+
+- `manifest.json` configures the MV3 extension.
+- `popup.html` renders the toolbar popup.
+- `popup.css` styles the popup.
+- `popup.js` handles popup actions and active-tab injection.
+- `contentScript.js` toggles page state and small retro decorations.
+- `retrofy.css` contains the reversible visual treatment.
+
+## Future modes
+
+The MVP is intentionally small, but the structure can later support modes such as:
+
+- Soft 90s
+- Geocities Chaos
+- Pure HTML
+- Retro Browser

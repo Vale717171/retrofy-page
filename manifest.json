@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Retrofy Page",
+  "description": "Turn ordinary webpages into a tasteful 1990s-style version on demand.",
+  "version": "0.1.0",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Retrofy Page"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": []
+}
