@@ -18,6 +18,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 - Friendly errors on restricted pages such as `chrome://extensions`.
 - Works best on ordinary pages such as Wikipedia, blogs, news articles, and simple company pages.
 - Retro Browser controls navigate the current tab. After a full page load, reopen Retro Browser from the popup if the frame is gone.
+- Extra retro effects include CRT scanlines, pixel-style cursors, mouse sparkles, marquee/blink text, rainbow headings, and CSS pixel-art under construction flair.
 
 ## Install locally
 

@@ -3,6 +3,10 @@
   const chromeId = "retrofy-page-chrome";
   const browserClass = "retrofy-browser-active";
   const browserId = "retrofy-browser-frame";
+  const effectsId = "retrofy-page-effects";
+  const sparkleClass = "retrofy-page-sparkle";
+  let lastSparkleAt = 0;
+  let isMouseTrailActive = false;
 
   if (window.retrofyPage) {
     return;
@@ -19,18 +23,25 @@
     document.documentElement.classList.remove(browserClass);
     document.getElementById(browserId)?.remove();
     addRetroChrome();
+    addRetroEffects();
+    enableMouseTrail();
   }
 
   function browser(pageUrl) {
     document.documentElement.classList.add(rootClass, browserClass);
     document.getElementById(chromeId)?.remove();
     addRetroBrowser(pageUrl);
+    addRetroEffects();
+    enableMouseTrail();
   }
 
   function disable() {
     document.documentElement.classList.remove(rootClass, browserClass);
     document.getElementById(chromeId)?.remove();
     document.getElementById(browserId)?.remove();
+    document.getElementById(effectsId)?.remove();
+    document.querySelectorAll(`.${sparkleClass}`).forEach((sparkle) => sparkle.remove());
+    disableMouseTrail();
   }
 
   function addRetroChrome() {
@@ -42,14 +53,32 @@
     chrome.id = chromeId;
     chrome.setAttribute("aria-hidden", "true");
     chrome.innerHTML = `
-      <div class="retrofy-page-banner">Best viewed in 800x600</div>
+      <div class="retrofy-page-marquee"><span>WELCOME TO MY PAGE - Best viewed in 800x600 - Sign my guestbook!</span></div>
+      <div class="retrofy-page-banner"><span class="retrofy-page-blink">New!</span> Best viewed in 800x600</div>
       <div class="retrofy-page-corner">
+        <div class="retrofy-page-worker" title="Under construction"></div>
         <strong>UNDER CONSTRUCTION</strong>
         <span>Visitor #000042</span>
       </div>
     `;
 
     document.body.prepend(chrome);
+  }
+
+  function addRetroEffects() {
+    if (document.getElementById(effectsId) || !document.body) {
+      return;
+    }
+
+    const effects = document.createElement("div");
+    effects.id = effectsId;
+    effects.setAttribute("aria-hidden", "true");
+    effects.innerHTML = `
+      <div class="retrofy-page-crt"></div>
+      <div class="retrofy-page-crt-flicker"></div>
+    `;
+
+    document.body.append(effects);
   }
 
   function addRetroBrowser(pageUrl) {
@@ -69,7 +98,7 @@
     frame.id = browserId;
     frame.innerHTML = `
       <div class="retrofy-browser-titlebar">
-        <span>Retro Browser 0.9</span>
+        <span class="retrofy-page-rainbow">Retro Browser 0.9</span>
         <span class="retrofy-browser-window-buttons" aria-label="Window controls">
           <span title="Minimize">_</span>
           <span title="Maximize">[]</span>
@@ -163,6 +192,43 @@
   function navigateWithNotice(navigate) {
     updateBrowserStatus("Loading... reopen Retro Browser from the popup if the frame disappears.");
     window.setTimeout(navigate, 250);
+  }
+
+  function enableMouseTrail() {
+    if (isMouseTrailActive) {
+      return;
+    }
+
+    isMouseTrailActive = true;
+    document.addEventListener("mousemove", addSparkle);
+  }
+
+  function disableMouseTrail() {
+    if (!isMouseTrailActive) {
+      return;
+    }
+
+    isMouseTrailActive = false;
+    document.removeEventListener("mousemove", addSparkle);
+  }
+
+  function addSparkle(event) {
+    const now = Date.now();
+
+    if (now - lastSparkleAt < 55 || !document.documentElement.classList.contains(rootClass)) {
+      return;
+    }
+
+    lastSparkleAt = now;
+
+    const sparkle = document.createElement("span");
+    sparkle.className = sparkleClass;
+    sparkle.textContent = "*";
+    sparkle.style.left = `${event.clientX}px`;
+    sparkle.style.top = `${event.clientY}px`;
+    document.body.append(sparkle);
+
+    window.setTimeout(() => sparkle.remove(), 700);
   }
 
   function normalizeAddress(value) {
