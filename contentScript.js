@@ -339,7 +339,7 @@
         </div>
         <div class="retrofy-win95-menubar">File&nbsp;&nbsp;Edit&nbsp;&nbsp;View&nbsp;&nbsp;Window&nbsp;&nbsp;Help</div>
         <div class="retrofy-win95-address">Address: ${escapeAttribute(pageUrl || location.href)}</div>
-        <iframe title="Retro desktop page snapshot" sandbox="" srcdoc="${escapeAttribute(getDesktopSnapshot(mode, cssText))}"></iframe>
+        <div class="retrofy-win95-frame-slot"></div>
         <div class="retrofy-win95-resizer" data-retrofy-resize-handle></div>
       </div>
       <div class="retrofy-win95-taskbar">
@@ -348,6 +348,12 @@
         <time>${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</time>
       </div>
     `;
+
+    const iframe = document.createElement("iframe");
+    iframe.title = "Retro desktop page snapshot";
+    iframe.setAttribute("sandbox", "");
+    iframe.srcdoc = getDesktopSnapshot(mode, cssText);
+    desktop.querySelector(".retrofy-win95-frame-slot")?.append(iframe);
 
     desktop.querySelector("[data-retrofy-desktop-close]")?.addEventListener("click", () => {
       disable();
