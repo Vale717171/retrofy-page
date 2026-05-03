@@ -85,3 +85,9 @@ Retro Browser and Windows 95 Desktop use `webNavigation` plus session storage on
 - `Soft 90s` keeps the default retro treatment.
 - `GeoCities Chaos` adds tiled backgrounds, louder colors, extra marquee energy, and stronger decorative styling.
 - `Pure HTML` strips the page back toward a plain HTML document.
+
+## Documentation
+
+- [PRIVACY.md](PRIVACY.md) - Privacy policy explaining data collection and permissions
+- [STORE_LISTING.md](STORE_LISTING.md) - Draft store listing content and permission justifications
+- [MANUAL_QA.md](MANUAL_QA.md) - Pre-submission test checklist
