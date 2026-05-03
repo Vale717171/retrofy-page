@@ -217,10 +217,7 @@ html.retrofy-browser-active .retrofy-browser-toolbar {
   overflow-x: auto !important;
 }
 
-html.retrofy-browser-active .retrofy-browser-toolbar span {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+html.retrofy-browser-active .retrofy-browser-toolbar button {
   width: auto !important;
   min-width: 64px !important;
   min-height: 28px !important;
@@ -230,6 +227,11 @@ html.retrofy-browser-active .retrofy-browser-toolbar span {
   color: #000000 !important;
   background: #dcdcdc !important;
   font: 12px Arial, Helvetica, sans-serif !important;
+  cursor: pointer !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-toolbar button:active {
+  border-style: inset !important;
 }
 
 html.retrofy-browser-active .retrofy-browser-address {
@@ -280,7 +282,7 @@ html.retrofy-browser-active .retrofy-browser-status {
     padding-top: 208px !important;
   }
 
-  html.retrofy-browser-active .retrofy-browser-toolbar span {
+  html.retrofy-browser-active .retrofy-browser-toolbar button {
     min-width: 58px !important;
   }
 }

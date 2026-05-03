@@ -17,6 +17,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 - Reversible effect.
 - Friendly errors on restricted pages such as `chrome://extensions`.
 - Works best on ordinary pages such as Wikipedia, blogs, news articles, and simple company pages.
+- Retro Browser controls navigate the current tab. After a full page load, reopen Retro Browser from the popup if the frame is gone.
 
 ## Install locally
 
@@ -34,7 +35,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 3. Click `Retrofy this page`.
 4. Confirm the page switches to a 1990s-style look.
 5. Click `Open Retro Browser`.
-6. Confirm the page gets a retro browser frame with a fake toolbar and address bar.
+6. Confirm the page gets a retro browser frame with working Back, Forward, Stop, Refresh, Home, and address bar navigation.
 7. Click `Remove retro mode`.
 8. Confirm the page returns to normal.
 9. Open a restricted page such as `chrome://extensions`.

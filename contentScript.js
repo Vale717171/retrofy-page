@@ -67,20 +67,106 @@
       </div>
       <div class="retrofy-browser-menubar">File&nbsp;&nbsp;Edit&nbsp;&nbsp;View&nbsp;&nbsp;Go&nbsp;&nbsp;Bookmarks&nbsp;&nbsp;Help</div>
       <div class="retrofy-browser-toolbar">
-        <span>Back</span>
-        <span>Forward</span>
-        <span>Stop</span>
-        <span>Refresh</span>
-        <span>Home</span>
+        <button type="button" data-retrofy-browser-action="back">Back</button>
+        <button type="button" data-retrofy-browser-action="forward">Forward</button>
+        <button type="button" data-retrofy-browser-action="stop">Stop</button>
+        <button type="button" data-retrofy-browser-action="refresh">Refresh</button>
+        <button type="button" data-retrofy-browser-action="home">Home</button>
       </div>
       <div class="retrofy-browser-address">
         <span>Address</span>
-        <input type="text" value="${escapeAttribute(pageUrl || location.href)}" readonly>
+        <input type="text" value="${escapeAttribute(pageUrl || location.href)}" aria-label="Retro Browser address">
       </div>
       <div class="retrofy-browser-status">Done</div>
     `;
 
+    frame.addEventListener("click", handleBrowserClick);
+    frame.addEventListener("keydown", handleBrowserKeydown);
     document.body.prepend(frame);
+  }
+
+  function handleBrowserClick(event) {
+    const button = event.target.closest("[data-retrofy-browser-action]");
+
+    if (!button) {
+      return;
+    }
+
+    event.preventDefault();
+    runBrowserAction(button.dataset.retrofyBrowserAction);
+  }
+
+  function handleBrowserKeydown(event) {
+    if (event.key !== "Enter" || !event.target.matches(".retrofy-browser-address input")) {
+      return;
+    }
+
+    event.preventDefault();
+    goToAddress(event.target.value);
+  }
+
+  function runBrowserAction(action) {
+    if (action === "back") {
+      history.back();
+      return;
+    }
+
+    if (action === "forward") {
+      history.forward();
+      return;
+    }
+
+    if (action === "stop") {
+      window.stop();
+      updateBrowserStatus("Stopped");
+      return;
+    }
+
+    if (action === "refresh") {
+      location.reload();
+      return;
+    }
+
+    if (action === "home") {
+      location.assign(location.origin);
+    }
+  }
+
+  function goToAddress(value) {
+    const url = normalizeAddress(value);
+
+    if (!url) {
+      updateBrowserStatus("Invalid address");
+      return;
+    }
+
+    location.assign(url);
+  }
+
+  function normalizeAddress(value) {
+    const trimmedValue = String(value || "").trim();
+
+    if (!trimmedValue) {
+      return "";
+    }
+
+    try {
+      return new URL(trimmedValue).href;
+    } catch {
+      try {
+        return new URL(`https://${trimmedValue}`).href;
+      } catch {
+        return "";
+      }
+    }
+  }
+
+  function updateBrowserStatus(message) {
+    const status = document.querySelector("#retrofy-browser-frame .retrofy-browser-status");
+
+    if (status) {
+      status.textContent = message;
+    }
   }
 
   function escapeAttribute(value) {
