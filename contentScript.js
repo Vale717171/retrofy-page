@@ -181,6 +181,7 @@
       return;
     }
 
+    const visitorNumber = getVisitorNumber();
     const chrome = document.createElement("div");
     chrome.id = chromeId;
     chrome.setAttribute("aria-hidden", "true");
@@ -191,7 +192,7 @@
       <div class="retrofy-page-corner">
         <div class="retrofy-page-worker" title="Under construction"></div>
         <strong>UNDER CONSTRUCTION</strong>
-        <span>Visitor #000042</span>
+        <span>Visitor #${visitorNumber}</span>
       </div>
     `;
 
@@ -223,6 +224,7 @@
     }
 
     const chrome = document.createElement("div");
+    const visitorNumber = getVisitorNumber();
     chrome.id = chromeId;
     chrome.setAttribute("aria-hidden", "true");
     chrome.innerHTML = `
@@ -232,7 +234,7 @@
       <div class="retrofy-page-corner">
         <div class="retrofy-page-worker" title="Under construction"></div>
         <strong>UNDER CONSTRUCTION</strong>
-        <span>Visitor #000042</span>
+        <span>Visitor #${visitorNumber}</span>
       </div>
     `;
     body.prepend(chrome);
@@ -615,5 +617,9 @@
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "")
       .slice(0, 80) || "retrofy-page";
+  }
+
+  function getVisitorNumber() {
+    return String(Math.floor(Math.random() * 1000000)).padStart(6, "0");
   }
 })();
