@@ -2,16 +2,35 @@ const retrofyButton = document.getElementById("retrofyButton");
 const retroBrowserButton = document.getElementById("retroBrowserButton");
 const desktopButton = document.getElementById("desktopButton");
 const exportButton = document.getElementById("exportButton");
+const real90sButton = document.getElementById("real90sButton");
 const removeButton = document.getElementById("removeButton");
 const modeSelect = document.getElementById("modeSelect");
 const statusEl = document.getElementById("status");
 
 const restrictedProtocols = ["chrome:", "edge:", "about:", "brave:", "opera:", "vivaldi:"];
+const real90sSites = [
+  "http://www.yahoo.com/",
+  "http://www.altavista.com/",
+  "http://www.geocities.com/",
+  "http://www.netscape.com/",
+  "http://www.microsoft.com/",
+  "http://www.apple.com/",
+  "http://www.cnn.com/",
+  "http://www.nasa.gov/",
+  "http://www.imdb.com/",
+  "http://www.wired.com/",
+  "http://www.hotwired.com/",
+  "http://www.lycos.com/",
+  "http://www.excite.com/",
+  "http://www.slashdot.org/",
+  "http://www.theonion.com/"
+];
 
 retrofyButton.addEventListener("click", () => runOnActiveTab("enable"));
 retroBrowserButton.addEventListener("click", () => runOnActiveTab("browser"));
 desktopButton.addEventListener("click", () => runOnActiveTab("desktop"));
 exportButton.addEventListener("click", () => runOnActiveTab("export"));
+real90sButton.addEventListener("click", openReal90sPage);
 removeButton.addEventListener("click", () => runOnActiveTab("disable"));
 
 async function runOnActiveTab(action) {
@@ -80,6 +99,7 @@ function setButtonsDisabled(isDisabled) {
   retroBrowserButton.disabled = isDisabled;
   desktopButton.disabled = isDisabled;
   exportButton.disabled = isDisabled;
+  real90sButton.disabled = isDisabled;
   removeButton.disabled = isDisabled;
   modeSelect.disabled = isDisabled;
 }
@@ -134,6 +154,13 @@ async function updateNavigationState(tabId, action, mode) {
       state: null
     });
   }
+}
+
+function openReal90sPage() {
+  const site = real90sSites[Math.floor(Math.random() * real90sSites.length)];
+  const year = 1996 + Math.floor(Math.random() * 4);
+  const url = `https://web.archive.org/web/${year}/${site}`;
+  chrome.tabs.create({ url });
 }
 
 function getLoadingMessage(action) {

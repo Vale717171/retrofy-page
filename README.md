@@ -13,6 +13,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
   - `Open Retro Browser`
   - `Windows 95 Desktop`
   - `Export as .htm`
+  - `Real 90s`
   - `Remove retro mode`
   - `Support the project` footer link
 - Injects CSS and JavaScript only into the active tab after a button click.
@@ -27,6 +28,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 - `Retrofy this page` plays a short inline 56k-style dial-up sound with no external audio request.
 - A fake `Loading... 28.8 kbps` overlay appears before applying retro mode.
 - `Export as .htm` downloads a standalone retro-styled HTML snapshot of the current page.
+- `Real 90s` opens a random archived 1996-1999 web page from a local list of classic sites.
 
 ## Install locally
 
@@ -49,14 +51,15 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 8. Confirm the page gets a retro browser frame with working Back, Forward, Stop, Refresh, Home, and address bar navigation.
 9. Click `Windows 95 Desktop` and confirm a fake desktop opens with the page snapshot in a draggable/resizable window.
 10. Click `Export as .htm` and confirm Chrome downloads a standalone `.htm` file.
-11. Click the `X` in the Retro Browser titlebar or desktop window and confirm retro mode closes.
-12. Open Retro Browser again, then click `Refresh`, `Home`, or enter a new URL in the address bar.
-13. Confirm the status bar says Retro Browser will try to restore itself after navigation.
-14. Confirm the frame comes back after the new page loads when Chrome still allows reinjection for that tab.
-15. Click `Remove retro mode`.
-16. Confirm the page returns to normal.
-17. Open a restricted page such as `chrome://extensions`.
-18. Click `Retrofy this page` and confirm the popup shows a friendly error.
+11. Click `Real 90s` and confirm a random archived 1996-1999 page opens in a new tab.
+12. Click the `X` in the Retro Browser titlebar or desktop window and confirm retro mode closes.
+13. Open Retro Browser again, then click `Refresh`, `Home`, or enter a new URL in the address bar.
+14. Confirm the status bar says Retro Browser will try to restore itself after navigation.
+15. Confirm the frame comes back after the new page loads when Chrome still allows reinjection for that tab.
+16. Click `Remove retro mode`.
+17. Confirm the page returns to normal.
+18. Open a restricted page such as `chrome://extensions`.
+19. Click `Retrofy this page` and confirm the popup shows a friendly error.
 
 ## Privacy
 
