@@ -49,9 +49,9 @@ async function runOnActiveTab(action) {
       throw new Error("Chrome does not allow extensions to change this kind of page. Try Retrofy Page on a normal website.");
     }
 
-    // Resolve the local extension URL for the dial-up sound once; the content
-    // script receives only this URL string — no binary data is transferred.
-    const audioUrl = action === "enable" ? chrome.runtime.getURL("assets/dialup.wav") : "";
+    // Resolve local extension audio once; the content script receives only
+    // this URL string — no binary data is transferred.
+    const audioUrl = getAudioUrl(action);
 
     if (action === "enable" || action === "browser" || action === "desktop") {
       await ensureRetrofyCss(tab.id);
@@ -118,6 +118,18 @@ function setButtonsDisabled(isDisabled) {
       control.disabled = isDisabled;
     }
   });
+}
+
+function getAudioUrl(action) {
+  if (action === "enable") {
+    return chrome.runtime.getURL("assets/dialup.wav");
+  }
+
+  if (action === "desktop") {
+    return chrome.runtime.getURL("assets/win95ish-chime.wav");
+  }
+
+  return "";
 }
 
 async function removeRetrofyCss(tabId) {

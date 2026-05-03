@@ -26,7 +26,8 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 - Extra retro effects include CRT scanlines, pixel-style cursors, mouse sparkles, marquee/blink text, rainbow headings, and CSS pixel-art under construction flair.
 - Includes a classic `Best viewed with Netscape Navigator` style badge.
 - Images get a subtle SVG posterize filter for a 256-color-era look without making photos unreadable.
-- `Retrofy this page` plays a short inline 56k-style dial-up sound with no external audio request.
+- `Retrofy this page` plays a short local 56k-style dial-up sound with no external audio request.
+- `Windows 95 Desktop` plays a brief original startup-style chime from a local extension asset.
 - A fake `Loading... 28.8 kbps` overlay appears before applying retro mode.
 - `Export as .htm` downloads a standalone retro-styled HTML snapshot of the current page.
 - `Real 90s` opens a random archived 1996-1999 web page from a local list of classic sites.

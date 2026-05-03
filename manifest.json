@@ -29,7 +29,7 @@
   "host_permissions": [],
   "web_accessible_resources": [
     {
-      "resources": ["assets/dialup.wav"],
+      "resources": ["assets/dialup.wav", "assets/win95ish-chime.wav"],
       "matches": ["<all_urls>"]
     }
   ]

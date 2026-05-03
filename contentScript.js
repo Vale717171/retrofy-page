@@ -68,6 +68,7 @@
   async function desktop(pageUrl, mode = "soft", cssText = "", skipLoader = false) {
     if (!skipLoader) {
       await showFakeLoader();
+      playDesktopStartupSound();
     }
 
     document.documentElement.classList.add(rootClass, desktopClass);
@@ -541,10 +542,9 @@
     document.removeEventListener("mousemove", addSparkle);
   }
 
-  // Plays the dial-up sound using a URL set by popup.js before this script runs.
-  // The URL points to the local extension asset assets/dialup.wav via chrome.runtime.getURL.
+  // Plays a local extension audio asset set by popup.js before this script runs.
   // Fails silently if the URL was not provided or autoplay is blocked.
-  function playDialUpSound() {
+  function playLocalSound(volume = 0.22) {
     const audioUrl = window.retrofyAudioUrl;
 
     if (!audioUrl) {
@@ -552,10 +552,18 @@
     }
 
     const audio = new Audio(audioUrl);
-    audio.volume = 0.22;
+    audio.volume = volume;
     audio.play().catch(() => {
       // Autoplay may be blocked on some pages; that is fine.
     });
+  }
+
+  function playDialUpSound() {
+    playLocalSound(0.22);
+  }
+
+  function playDesktopStartupSound() {
+    playLocalSound(0.18);
   }
 
   function addSparkle(event) {
