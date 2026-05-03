@@ -11,6 +11,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
   - mode selector: `Soft 90s`, `GeoCities Chaos`, `Pure HTML`
   - `Retrofy this page`
   - `Open Retro Browser`
+  - `Export as .htm`
   - `Remove retro mode`
   - `Support the project` footer link
 - Injects CSS and JavaScript only into the active tab after a button click.
@@ -22,6 +23,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 - Extra retro effects include CRT scanlines, pixel-style cursors, mouse sparkles, marquee/blink text, rainbow headings, and CSS pixel-art under construction flair.
 - `Retrofy this page` plays a short inline 56k-style dial-up sound with no external audio request.
 - A fake `Loading... 28.8 kbps` overlay appears before applying retro mode.
+- `Export as .htm` downloads a standalone retro-styled HTML snapshot of the current page.
 
 ## Install locally
 
@@ -42,14 +44,15 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 6. Try `Pure HTML` and confirm the page becomes stripped back and mostly unstyled.
 7. Click `Open Retro Browser`.
 8. Confirm the page gets a retro browser frame with working Back, Forward, Stop, Refresh, Home, and address bar navigation.
-9. Click the `X` in the Retro Browser titlebar and confirm retro mode closes.
-10. Open Retro Browser again, then click `Refresh`, `Home`, or enter a new URL in the address bar.
-11. Confirm the status bar warns you that the frame may disappear after navigation.
-12. Reopen Retro Browser from the popup if the frame is gone after the new page loads.
-13. Click `Remove retro mode`.
-14. Confirm the page returns to normal.
-15. Open a restricted page such as `chrome://extensions`.
-16. Click `Retrofy this page` and confirm the popup shows a friendly error.
+9. Click `Export as .htm` and confirm Chrome downloads a standalone `.htm` file.
+10. Click the `X` in the Retro Browser titlebar and confirm retro mode closes.
+11. Open Retro Browser again, then click `Refresh`, `Home`, or enter a new URL in the address bar.
+12. Confirm the status bar warns you that the frame may disappear after navigation.
+13. Reopen Retro Browser from the popup if the frame is gone after the new page loads.
+14. Click `Remove retro mode`.
+15. Confirm the page returns to normal.
+16. Open a restricted page such as `chrome://extensions`.
+17. Click `Retrofy this page` and confirm the popup shows a friendly error.
 
 ## Privacy
 

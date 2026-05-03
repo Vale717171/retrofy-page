@@ -18,6 +18,7 @@
   window.retrofyPage = {
     enable,
     browser,
+    export: exportHtml,
     disable
   };
 
@@ -67,6 +68,53 @@
     document.getElementById(loaderId)?.remove();
     document.querySelectorAll(`.${sparkleClass}`).forEach((sparkle) => sparkle.remove());
     disableMouseTrail();
+  }
+
+  function exportHtml(_pageUrl, mode = "soft", cssText = "") {
+    const clone = document.documentElement.cloneNode(true);
+    const exportMode = modeClasses.includes(`retrofy-mode-${mode}`) ? mode : "soft";
+
+    clone.classList.add(rootClass, `retrofy-mode-${exportMode}`);
+    clone.classList.remove(browserClass);
+    clone.querySelector(`#${loaderId}`)?.remove();
+    clone.querySelectorAll(`.${sparkleClass}`).forEach((sparkle) => sparkle.remove());
+
+    if (exportMode === "pure-html") {
+      clone.querySelector(`#${chromeId}`)?.remove();
+      clone.querySelector(`#${effectsId}`)?.remove();
+    } else {
+      ensureExportChrome(clone, exportMode);
+      ensureExportEffects(clone);
+    }
+
+    let head = clone.querySelector("head");
+
+    if (!head) {
+      head = document.createElement("head");
+      clone.insertBefore(head, clone.firstChild);
+    }
+    const base = document.createElement("base");
+    base.href = location.href;
+    const style = document.createElement("style");
+    style.textContent = cssText;
+    const note = document.createComment(" Exported with Retrofy Page. No external Retrofy assets are required. ");
+
+    head.prepend(note);
+    head.prepend(style);
+    head.prepend(base);
+
+    const html = `<!doctype html>\n${clone.outerHTML}`;
+    const blob = new Blob([html], { type: "text/html" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${getExportFilename()}-retrofy.htm`;
+    document.body.append(link);
+    link.click();
+
+    window.setTimeout(() => {
+      URL.revokeObjectURL(link.href);
+      link.remove();
+    }, 1000);
   }
 
   function setMode(mode) {
@@ -141,6 +189,54 @@
     `;
 
     document.body.append(effects);
+  }
+
+  function ensureExportChrome(clone, mode) {
+    if (clone.querySelector(`#${chromeId}`)) {
+      return;
+    }
+
+    const body = clone.querySelector("body");
+
+    if (!body) {
+      return;
+    }
+
+    const chrome = document.createElement("div");
+    chrome.id = chromeId;
+    chrome.setAttribute("aria-hidden", "true");
+    chrome.innerHTML = `
+      <div class="retrofy-page-marquee"><span>WELCOME TO MY PAGE - Best viewed in 800x600 - Sign my guestbook!</span></div>
+      ${mode === "chaos" ? `<div class="retrofy-chaos-strip"><span>COOL LINKS - FREE MIDI - WEB RING - EMAIL ME - HOT NEW SITE</span></div>` : ""}
+      <div class="retrofy-page-banner"><span class="retrofy-page-blink">New!</span> Best viewed in 800x600</div>
+      <div class="retrofy-page-corner">
+        <div class="retrofy-page-worker" title="Under construction"></div>
+        <strong>UNDER CONSTRUCTION</strong>
+        <span>Visitor #000042</span>
+      </div>
+    `;
+    body.prepend(chrome);
+  }
+
+  function ensureExportEffects(clone) {
+    if (clone.querySelector(`#${effectsId}`)) {
+      return;
+    }
+
+    const body = clone.querySelector("body");
+
+    if (!body) {
+      return;
+    }
+
+    const effects = document.createElement("div");
+    effects.id = effectsId;
+    effects.setAttribute("aria-hidden", "true");
+    effects.innerHTML = `
+      <div class="retrofy-page-crt"></div>
+      <div class="retrofy-page-crt-flicker"></div>
+    `;
+    body.append(effects);
   }
 
   function addRetroBrowser(pageUrl) {
@@ -341,5 +437,15 @@
       .replaceAll("\"", "&quot;")
       .replaceAll("<", "&lt;")
       .replaceAll(">", "&gt;");
+  }
+
+  function getExportFilename() {
+    const host = location.hostname || "retro-page";
+    const title = document.title || host;
+    return `${host}-${title}`
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 80) || "retrofy-page";
   }
 })();
