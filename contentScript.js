@@ -189,6 +189,7 @@
       <div class="retrofy-page-marquee"><span>WELCOME TO MY PAGE - Best viewed in 800x600 - Sign my guestbook!</span></div>
       <div class="retrofy-chaos-strip"><span>COOL LINKS - FREE MIDI - WEB RING - EMAIL ME - HOT NEW SITE</span></div>
       <div class="retrofy-page-banner"><span class="retrofy-page-blink">New!</span> Best viewed in 800x600</div>
+      <div class="retrofy-browser-badge">Best viewed with Netscape Navigator</div>
       <div class="retrofy-page-corner">
         <div class="retrofy-page-worker" title="Under construction"></div>
         <strong>UNDER CONSTRUCTION</strong>
@@ -231,6 +232,7 @@
       <div class="retrofy-page-marquee"><span>WELCOME TO MY PAGE - Best viewed in 800x600 - Sign my guestbook!</span></div>
       ${mode === "chaos" ? `<div class="retrofy-chaos-strip"><span>COOL LINKS - FREE MIDI - WEB RING - EMAIL ME - HOT NEW SITE</span></div>` : ""}
       <div class="retrofy-page-banner"><span class="retrofy-page-blink">New!</span> Best viewed in 800x600</div>
+      <div class="retrofy-browser-badge">Best viewed with Netscape Navigator</div>
       <div class="retrofy-page-corner">
         <div class="retrofy-page-worker" title="Under construction"></div>
         <strong>UNDER CONSTRUCTION</strong>
