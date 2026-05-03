@@ -24,8 +24,6 @@ async function runOnActiveTab(action) {
       throw new Error("Chrome does not allow extensions to change this kind of page. Try Retrofy Page on a normal website.");
     }
 
-    const isPersistent = action === "browser" ? await requestPersistentBrowserPermission() : false;
-
     if (action === "enable" || action === "browser") {
       await chrome.scripting.insertCSS({
         target: { tabId: tab.id },
@@ -46,15 +44,7 @@ async function runOnActiveTab(action) {
       }
     });
 
-    if (action === "browser" || action === "disable") {
-      await chrome.runtime.sendMessage({
-        type: "retrofy:setBrowserPersistence",
-        tabId: tab.id,
-        isEnabled: action === "browser" && isPersistent
-      });
-    }
-
-    setStatus(getSuccessMessage(action, isPersistent));
+    setStatus(getSuccessMessage(action));
   } catch (error) {
     setStatus(error.message || "Retrofy Page could not change this page.");
   } finally {
@@ -81,18 +71,6 @@ function setButtonsDisabled(isDisabled) {
   removeButton.disabled = isDisabled;
 }
 
-async function requestPersistentBrowserPermission() {
-  const permission = { origins: ["<all_urls>"] };
-  const alreadyGranted = await chrome.permissions.contains(permission);
-
-  if (alreadyGranted) {
-    return true;
-  }
-
-  setStatus("Chrome may ask for site access so Retro Browser can stay open after navigation.");
-  return chrome.permissions.request(permission);
-}
-
 function getLoadingMessage(action) {
   if (action === "browser") {
     return "Opening Retro Browser...";
@@ -101,11 +79,9 @@ function getLoadingMessage(action) {
   return action === "enable" ? "Retrofying this page..." : "Removing retro mode...";
 }
 
-function getSuccessMessage(action, isPersistent = false) {
+function getSuccessMessage(action) {
   if (action === "browser") {
-    return isPersistent
-      ? "Retro Browser is open and will stay on during navigation."
-      : "Retro Browser is open for this page. Persistence was not enabled.";
+    return "Retro Browser is open for this page.";
   }
 
   return action === "enable" ? "Retro mode is on. Welcome back to the dial-up era." : "Retro mode removed.";
