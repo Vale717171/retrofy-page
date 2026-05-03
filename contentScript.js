@@ -46,8 +46,11 @@
     playDialUpSound();
   }
 
-  async function browser(pageUrl, mode = "soft") {
-    await showFakeLoader();
+  async function browser(pageUrl, mode = "soft", _cssText = "", skipLoader = false) {
+    if (!skipLoader) {
+      await showFakeLoader();
+    }
+
     document.documentElement.classList.add(rootClass, browserClass);
     setMode(mode);
     document.getElementById(chromeId)?.remove();
@@ -63,8 +66,11 @@
     enableMouseTrail();
   }
 
-  async function desktop(pageUrl, mode = "soft", cssText = "") {
-    await showFakeLoader();
+  async function desktop(pageUrl, mode = "soft", cssText = "", skipLoader = false) {
+    if (!skipLoader) {
+      await showFakeLoader();
+    }
+
     document.documentElement.classList.add(rootClass, desktopClass);
     document.documentElement.classList.remove(browserClass);
     setMode(mode);
@@ -500,7 +506,7 @@
   }
 
   function navigateWithNotice(navigate) {
-    updateBrowserStatus("Loading... reopen Retro Browser from the popup if the frame disappears.");
+    updateBrowserStatus("Loading... Retro Browser will try to restore itself after navigation.");
     window.setTimeout(navigate, 250);
   }
 

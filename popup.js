@@ -52,6 +52,8 @@ async function runOnActiveTab(action) {
       await removeRetrofyCss(tab.id);
     }
 
+    await updateNavigationState(tab.id, action, modeSelect.value);
+
     setStatus(getSuccessMessage(action));
   } catch (error) {
     setStatus(error.message || "Retrofy Page could not change this page.");
@@ -113,6 +115,25 @@ async function ensureRetrofyCss(tabId) {
 async function loadRetrofyCss() {
   const response = await fetch(chrome.runtime.getURL("retrofy.css"));
   return response.text();
+}
+
+async function updateNavigationState(tabId, action, mode) {
+  if (action === "browser" || action === "desktop") {
+    await chrome.runtime.sendMessage({
+      type: "retrofy:setNavigationState",
+      tabId,
+      state: { action, mode }
+    });
+    return;
+  }
+
+  if (action === "disable") {
+    await chrome.runtime.sendMessage({
+      type: "retrofy:setNavigationState",
+      tabId,
+      state: null
+    });
+  }
 }
 
 function getLoadingMessage(action) {

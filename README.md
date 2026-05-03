@@ -20,7 +20,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 - Reversible effect.
 - Friendly errors on restricted pages such as `chrome://extensions`.
 - Works best on ordinary pages such as Wikipedia, blogs, news articles, and simple company pages.
-- Retro Browser controls navigate the current tab. After a full page load, reopen Retro Browser from the popup if the frame is gone.
+- Retro Browser controls navigate the current tab and try to restore the frame after navigation in the same tab.
 - Windows 95 Desktop opens a draggable and resizable fake desktop window with a snapshot of the current page inside.
 - Extra retro effects include CRT scanlines, pixel-style cursors, mouse sparkles, marquee/blink text, rainbow headings, and CSS pixel-art under construction flair.
 - Images get a subtle SVG posterize filter for a 256-color-era look without making photos unreadable.
@@ -51,8 +51,8 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 10. Click `Export as .htm` and confirm Chrome downloads a standalone `.htm` file.
 11. Click the `X` in the Retro Browser titlebar or desktop window and confirm retro mode closes.
 12. Open Retro Browser again, then click `Refresh`, `Home`, or enter a new URL in the address bar.
-13. Confirm the status bar warns you that the frame may disappear after navigation.
-14. Reopen Retro Browser from the popup if the frame is gone after the new page loads.
+13. Confirm the status bar says Retro Browser will try to restore itself after navigation.
+14. Confirm the frame comes back after the new page loads when Chrome still allows reinjection for that tab.
 15. Click `Remove retro mode`.
 16. Confirm the page returns to normal.
 17. Open a restricted page such as `chrome://extensions`.
@@ -62,13 +62,15 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 
 Retrofy Page does not track users, collect data, call a backend, or load external scripts. The only external URL is the visible `Support the project` link in the popup footer, which opens only when clicked.
 
+Retro Browser and Windows 95 Desktop use `webNavigation` plus session storage only to restore the retro frame after navigation in a tab where you already clicked the extension. No browsing history is collected or sent anywhere.
+
 ## Project structure
 
 - `manifest.json` configures the MV3 extension.
 - `popup.html` renders the toolbar popup.
 - `popup.css` styles the popup.
 - `popup.js` handles popup actions and active-tab injection.
-- `background.js` removes injected CSS when Retro Browser is closed from inside the page.
+- `background.js` removes injected CSS when Retro Browser is closed from inside the page and restores Retro Browser/Desktop after navigation.
 - `contentScript.js` toggles page state, small retro decorations, and the Retro Browser frame.
 - `retrofy.css` contains the reversible visual treatment.
 - `assets/` contains the extension icons.

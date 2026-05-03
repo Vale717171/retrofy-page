@@ -22,7 +22,9 @@
   },
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage",
+    "webNavigation"
   ],
   "host_permissions": []
 }
