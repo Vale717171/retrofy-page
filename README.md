@@ -19,6 +19,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 - Works best on ordinary pages such as Wikipedia, blogs, news articles, and simple company pages.
 - Retro Browser controls navigate the current tab. After a full page load, reopen Retro Browser from the popup if the frame is gone.
 - Extra retro effects include CRT scanlines, pixel-style cursors, mouse sparkles, marquee/blink text, rainbow headings, and CSS pixel-art under construction flair.
+- `Retrofy this page` plays a short inline 56k-style dial-up sound with no external audio request.
 
 ## Install locally
 
