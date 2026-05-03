@@ -29,12 +29,8 @@ async function runOnActiveTab(action) {
       throw new Error("Chrome does not allow extensions to change this kind of page. Try Retrofy Page on a normal website.");
     }
 
-    if (action === "enable" || action === "browser" || action === "desktop" || action === "export") {
-      await removeRetrofyCss(tab.id);
-      await chrome.scripting.insertCSS({
-        target: { tabId: tab.id },
-        files: ["retrofy.css"]
-      });
+    if (action === "enable" || action === "browser" || action === "desktop") {
+      await ensureRetrofyCss(tab.id);
     }
 
     await chrome.scripting.executeScript({
@@ -95,6 +91,23 @@ async function removeRetrofyCss(tabId) {
   } catch {
     // The stylesheet may not be present yet, which is fine.
   }
+}
+
+async function ensureRetrofyCss(tabId) {
+  const [{ result: isRetrofyActive } = {}] = await chrome.scripting.executeScript({
+    target: { tabId },
+    func: () => document.documentElement.classList.contains("retrofy-page-active")
+  });
+
+  if (isRetrofyActive) {
+    return;
+  }
+
+  await removeRetrofyCss(tabId);
+  await chrome.scripting.insertCSS({
+    target: { tabId },
+    files: ["retrofy.css"]
+  });
 }
 
 async function loadRetrofyCss() {
