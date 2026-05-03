@@ -6,6 +6,7 @@ const real90sButton = document.getElementById("real90sButton");
 const removeButton = document.getElementById("removeButton");
 const modeSelect = document.getElementById("modeSelect");
 const statusEl = document.getElementById("status");
+const defaultMode = "soft";
 
 const restrictedProtocols = ["chrome:", "edge:", "about:", "brave:", "opera:", "vivaldi:"];
 const real90sSites = [
@@ -26,12 +27,12 @@ const real90sSites = [
   "www.theonion.com"
 ];
 
-retrofyButton.addEventListener("click", () => runOnActiveTab("enable"));
-retroBrowserButton.addEventListener("click", () => runOnActiveTab("browser"));
-desktopButton.addEventListener("click", () => runOnActiveTab("desktop"));
-exportButton.addEventListener("click", () => runOnActiveTab("export"));
-real90sButton.addEventListener("click", openReal90sPage);
-removeButton.addEventListener("click", () => runOnActiveTab("disable"));
+retrofyButton?.addEventListener("click", () => runOnActiveTab("enable"));
+retroBrowserButton?.addEventListener("click", () => runOnActiveTab("browser"));
+desktopButton?.addEventListener("click", () => runOnActiveTab("desktop"));
+exportButton?.addEventListener("click", () => runOnActiveTab("export"));
+real90sButton?.addEventListener("click", openReal90sPage);
+removeButton?.addEventListener("click", () => runOnActiveTab("disable"));
 
 async function runOnActiveTab(action) {
   setStatus(getLoadingMessage(action));
@@ -61,7 +62,7 @@ async function runOnActiveTab(action) {
 
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      args: [action, tab.url, modeSelect.value, retrofyCss],
+      args: [action, tab.url, getSelectedMode(), retrofyCss],
       func: (requestedAction, pageUrl, mode, cssText) => {
         return window.retrofyPage?.[requestedAction]?.(pageUrl, mode, cssText);
       }
@@ -71,7 +72,7 @@ async function runOnActiveTab(action) {
       await removeRetrofyCss(tab.id);
     }
 
-    await updateNavigationState(tab.id, action, modeSelect.value);
+    await updateNavigationState(tab.id, action, getSelectedMode());
 
     setStatus(getSuccessMessage(action));
   } catch (error) {
@@ -91,17 +92,25 @@ function isRestrictedUrl(url) {
 }
 
 function setStatus(message) {
-  statusEl.textContent = message;
+  if (statusEl) {
+    statusEl.textContent = message;
+  }
 }
 
 function setButtonsDisabled(isDisabled) {
-  retrofyButton.disabled = isDisabled;
-  retroBrowserButton.disabled = isDisabled;
-  desktopButton.disabled = isDisabled;
-  exportButton.disabled = isDisabled;
-  real90sButton.disabled = isDisabled;
-  removeButton.disabled = isDisabled;
-  modeSelect.disabled = isDisabled;
+  [
+    retrofyButton,
+    retroBrowserButton,
+    desktopButton,
+    exportButton,
+    real90sButton,
+    removeButton,
+    modeSelect
+  ].forEach((control) => {
+    if (control) {
+      control.disabled = isDisabled;
+    }
+  });
 }
 
 async function removeRetrofyCss(tabId) {
@@ -154,6 +163,10 @@ async function updateNavigationState(tabId, action, mode) {
       state: null
     });
   }
+}
+
+function getSelectedMode() {
+  return modeSelect?.value || defaultMode;
 }
 
 function openReal90sPage() {
