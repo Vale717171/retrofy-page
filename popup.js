@@ -1,6 +1,7 @@
 const retrofyButton = document.getElementById("retrofyButton");
 const retroBrowserButton = document.getElementById("retroBrowserButton");
 const removeButton = document.getElementById("removeButton");
+const modeSelect = document.getElementById("modeSelect");
 const statusEl = document.getElementById("status");
 
 const restrictedProtocols = ["chrome:", "edge:", "about:", "brave:", "opera:", "vivaldi:"];
@@ -39,9 +40,9 @@ async function runOnActiveTab(action) {
 
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      args: [action, tab.url],
-      func: (requestedAction, pageUrl) => {
-        window.retrofyPage?.[requestedAction]?.(pageUrl);
+      args: [action, tab.url, modeSelect.value],
+      func: (requestedAction, pageUrl, mode) => {
+        return window.retrofyPage?.[requestedAction]?.(pageUrl, mode);
       }
     });
 
@@ -74,6 +75,7 @@ function setButtonsDisabled(isDisabled) {
   retrofyButton.disabled = isDisabled;
   retroBrowserButton.disabled = isDisabled;
   removeButton.disabled = isDisabled;
+  modeSelect.disabled = isDisabled;
 }
 
 async function removeRetrofyCss(tabId) {

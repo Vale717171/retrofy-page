@@ -46,6 +46,33 @@ p {
   gap: 8px;
 }
 
+.mode-picker {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 6px;
+  border: 2px inset #f1f1f1;
+  background: #eeeeee;
+  font-size: 12px;
+}
+
+.mode-picker label {
+  font-weight: 700;
+}
+
+select {
+  width: 100%;
+  min-width: 0;
+  height: 28px;
+  border: 2px inset #ffffff;
+  border-radius: 0;
+  background: #ffffff;
+  color: #000000;
+  font: 12px Arial, Helvetica, sans-serif;
+}
+
 button {
   width: 100%;
   min-height: 34px;

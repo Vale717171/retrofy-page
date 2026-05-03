@@ -12,6 +12,22 @@ html.retrofy-page-active body {
   text-shadow: none !important;
 }
 
+html.retrofy-page-active.retrofy-mode-chaos,
+html.retrofy-page-active.retrofy-mode-chaos body {
+  background-color: #00ffff !important;
+  background-image:
+    radial-gradient(circle at 4px 4px, #ff00ff 0 2px, transparent 3px),
+    radial-gradient(circle at 12px 12px, #ffff00 0 2px, transparent 3px),
+    linear-gradient(45deg, #00ffff 25%, #ff66ff 25%, #ff66ff 50%, #00ff00 50%, #00ff00 75%, #ffff00 75%) !important;
+  background-size: 16px 16px, 16px 16px, 32px 32px !important;
+}
+
+html.retrofy-page-active.retrofy-mode-pure-html,
+html.retrofy-page-active.retrofy-mode-pure-html body {
+  color: #000000 !important;
+  background: #ffffff !important;
+}
+
 html.retrofy-page-active,
 html.retrofy-page-active body,
 html.retrofy-page-active body * {
@@ -200,6 +216,31 @@ html.retrofy-page-active .retrofy-page-marquee span {
   animation: retrofy-page-marquee 8s linear infinite !important;
 }
 
+html.retrofy-page-active .retrofy-chaos-strip {
+  display: none !important;
+}
+
+html.retrofy-page-active.retrofy-mode-chaos .retrofy-chaos-strip {
+  display: block !important;
+  width: min(760px, calc(100vw - 20px)) !important;
+  height: 24px !important;
+  margin: 4px auto !important;
+  overflow: hidden !important;
+  border: 3px ridge #ff00ff !important;
+  background: #ffff00 !important;
+  color: #ff0000 !important;
+  font: 700 13px "Courier New", Courier, monospace !important;
+  white-space: nowrap !important;
+}
+
+html.retrofy-page-active.retrofy-mode-chaos .retrofy-chaos-strip span {
+  display: inline-block !important;
+  min-width: 100% !important;
+  padding: 3px 0 !important;
+  font-family: "Courier New", Courier, monospace !important;
+  animation: retrofy-page-marquee 5s linear infinite reverse !important;
+}
+
 html.retrofy-page-active .retrofy-page-banner {
   margin: 8px auto !important;
   max-width: 360px !important;
@@ -284,6 +325,103 @@ html.retrofy-page-active .retrofy-page-sparkle {
   pointer-events: none !important;
   text-shadow: 1px 1px #ff00ff, -1px -1px #00ffff !important;
   animation: retrofy-page-sparkle 0.7s steps(5, end) forwards !important;
+}
+
+html.retrofy-page-active.retrofy-mode-chaos h1,
+html.retrofy-page-active.retrofy-mode-chaos h2,
+html.retrofy-page-active.retrofy-mode-chaos h3 {
+  color: #ff0000 !important;
+  text-transform: uppercase !important;
+  text-shadow: 2px 2px #ffff00, 4px 4px #0000ff !important;
+}
+
+html.retrofy-page-active.retrofy-mode-chaos a {
+  color: #ff00ff !important;
+  background: #ffff00 !important;
+  font-weight: 700 !important;
+}
+
+html.retrofy-page-active.retrofy-mode-chaos img {
+  border: 5px ridge #00ff00 !important;
+}
+
+html.retrofy-page-active.retrofy-mode-pure-html body,
+html.retrofy-page-active.retrofy-mode-pure-html body *:not(#retrofy-page-loader):not(#retrofy-page-loader *) {
+  color: #000000 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+html.retrofy-page-active.retrofy-mode-pure-html a {
+  color: #0000ee !important;
+  text-decoration: underline !important;
+}
+
+html.retrofy-page-active.retrofy-mode-pure-html h1,
+html.retrofy-page-active.retrofy-mode-pure-html h2,
+html.retrofy-page-active.retrofy-mode-pure-html .retrofy-page-rainbow {
+  color: #000000 !important;
+  background: transparent !important;
+  animation: none !important;
+}
+
+html.retrofy-page-active.retrofy-mode-pure-html #retrofy-page-chrome,
+html.retrofy-page-active.retrofy-mode-pure-html #retrofy-page-effects,
+html.retrofy-page-active.retrofy-mode-pure-html .retrofy-page-sparkle {
+  display: none !important;
+}
+
+#retrofy-page-loader {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483647 !important;
+  display: grid !important;
+  place-items: center !important;
+  background: rgba(0, 0, 0, 0.55) !important;
+  color: #000000 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+#retrofy-page-loader .retrofy-loader-window {
+  width: min(340px, calc(100vw - 28px)) !important;
+  padding: 10px !important;
+  border: 2px outset #ffffff !important;
+  border-radius: 0 !important;
+  background: #c0c0c0 !important;
+  box-shadow: none !important;
+}
+
+#retrofy-page-loader .retrofy-loader-title {
+  margin: -6px -6px 8px !important;
+  padding: 4px 6px !important;
+  color: #ffffff !important;
+  background: #000080 !important;
+  font: 700 13px Arial, Helvetica, sans-serif !important;
+}
+
+#retrofy-page-loader .retrofy-loader-copy,
+#retrofy-page-loader .retrofy-loader-details {
+  font: 12px Arial, Helvetica, sans-serif !important;
+}
+
+#retrofy-page-loader .retrofy-loader-bar {
+  height: 22px !important;
+  margin: 8px 0 !important;
+  padding: 2px !important;
+  border: 2px inset #ffffff !important;
+  background: #ffffff !important;
+}
+
+#retrofy-page-loader .retrofy-loader-bar span {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: repeating-linear-gradient(90deg, #000080 0 12px, #0000cc 12px 16px) !important;
+  transform-origin: left center !important;
+  animation: retrofy-page-loading 1.5s steps(12, end) forwards !important;
 }
 
 html.retrofy-browser-active body {
@@ -502,5 +640,15 @@ html.retrofy-browser-active .retrofy-browser-status {
   to {
     opacity: 0;
     transform: scale(0) rotate(180deg);
+  }
+}
+
+@keyframes retrofy-page-loading {
+  from {
+    transform: scaleX(0.05);
+  }
+
+  to {
+    transform: scaleX(1);
   }
 }
