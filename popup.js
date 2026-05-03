@@ -1,5 +1,6 @@
 const retrofyButton = document.getElementById("retrofyButton");
 const retroBrowserButton = document.getElementById("retroBrowserButton");
+const desktopButton = document.getElementById("desktopButton");
 const exportButton = document.getElementById("exportButton");
 const removeButton = document.getElementById("removeButton");
 const modeSelect = document.getElementById("modeSelect");
@@ -9,6 +10,7 @@ const restrictedProtocols = ["chrome:", "edge:", "about:", "brave:", "opera:", "
 
 retrofyButton.addEventListener("click", () => runOnActiveTab("enable"));
 retroBrowserButton.addEventListener("click", () => runOnActiveTab("browser"));
+desktopButton.addEventListener("click", () => runOnActiveTab("desktop"));
 exportButton.addEventListener("click", () => runOnActiveTab("export"));
 removeButton.addEventListener("click", () => runOnActiveTab("disable"));
 
@@ -27,7 +29,7 @@ async function runOnActiveTab(action) {
       throw new Error("Chrome does not allow extensions to change this kind of page. Try Retrofy Page on a normal website.");
     }
 
-    if (action === "enable" || action === "browser" || action === "export") {
+    if (action === "enable" || action === "browser" || action === "desktop" || action === "export") {
       await removeRetrofyCss(tab.id);
       await chrome.scripting.insertCSS({
         target: { tabId: tab.id },
@@ -40,7 +42,7 @@ async function runOnActiveTab(action) {
       files: ["contentScript.js"]
     });
 
-    const retrofyCss = action === "export" ? await loadRetrofyCss() : "";
+    const retrofyCss = action === "export" || action === "desktop" ? await loadRetrofyCss() : "";
 
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
@@ -78,6 +80,7 @@ function setStatus(message) {
 function setButtonsDisabled(isDisabled) {
   retrofyButton.disabled = isDisabled;
   retroBrowserButton.disabled = isDisabled;
+  desktopButton.disabled = isDisabled;
   exportButton.disabled = isDisabled;
   removeButton.disabled = isDisabled;
   modeSelect.disabled = isDisabled;
@@ -100,6 +103,10 @@ async function loadRetrofyCss() {
 }
 
 function getLoadingMessage(action) {
+  if (action === "desktop") {
+    return "Opening Windows 95 Desktop...";
+  }
+
   if (action === "export") {
     return "Preparing .htm export...";
   }
@@ -112,6 +119,10 @@ function getLoadingMessage(action) {
 }
 
 function getSuccessMessage(action) {
+  if (action === "desktop") {
+    return "Windows 95 Desktop is open.";
+  }
+
   if (action === "export") {
     return "Export ready. Check your downloads.";
   }

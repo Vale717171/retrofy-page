@@ -562,6 +562,154 @@ html.retrofy-browser-active .retrofy-browser-status {
   font: 12px Arial, Helvetica, sans-serif !important;
 }
 
+html.retrofy-desktop-active body {
+  overflow: hidden !important;
+}
+
+html.retrofy-desktop-active #retrofy-win95-desktop {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483647 !important;
+  overflow: hidden !important;
+  color: #000000 !important;
+  background:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.08) 25%, transparent 25%) 0 0 / 16px 16px,
+    #008080 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-icon {
+  position: absolute !important;
+  top: 18px !important;
+  left: 16px !important;
+  width: 58px !important;
+  color: #ffffff !important;
+  font: 11px Arial, Helvetica, sans-serif !important;
+  text-align: center !important;
+  text-shadow: 1px 1px #000000 !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-icon-art {
+  width: 32px !important;
+  height: 28px !important;
+  margin: 0 auto 4px !important;
+  border: 2px outset #ffffff !important;
+  background:
+    linear-gradient(#000080 0 0) 3px 3px / 22px 5px no-repeat,
+    linear-gradient(#ffffff 0 0) 4px 10px / 20px 10px no-repeat,
+    #c0c0c0 !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-window {
+  position: absolute !important;
+  min-width: 320px !important;
+  min-height: 240px !important;
+  display: grid !important;
+  grid-template-rows: 25px 25px 24px minmax(0, 1fr) !important;
+  border: 2px outset #ffffff !important;
+  border-radius: 0 !important;
+  background: #c0c0c0 !important;
+  box-shadow: none !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-titlebar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  padding: 3px 4px 3px 6px !important;
+  color: #ffffff !important;
+  background: #000080 !important;
+  font: 700 13px Arial, Helvetica, sans-serif !important;
+  cursor: move !important;
+  user-select: none !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-titlebar span {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-titlebar button,
+html.retrofy-desktop-active .retrofy-win95-taskbar button {
+  min-width: 22px !important;
+  height: 20px !important;
+  padding: 0 5px !important;
+  border: 2px outset #ffffff !important;
+  border-radius: 0 !important;
+  color: #000000 !important;
+  background: #c0c0c0 !important;
+  font: 700 11px Arial, Helvetica, sans-serif !important;
+  cursor: pointer !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-titlebar button:active,
+html.retrofy-desktop-active .retrofy-win95-taskbar button:active {
+  border-style: inset !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-menubar,
+html.retrofy-desktop-active .retrofy-win95-address {
+  padding: 5px 6px !important;
+  border-bottom: 2px inset #ffffff !important;
+  background: #c0c0c0 !important;
+  font: 12px Arial, Helvetica, sans-serif !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-window iframe {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  border: 2px inset #ffffff !important;
+  background: #ffffff !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-resizer {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 16px !important;
+  height: 16px !important;
+  cursor: nwse-resize !important;
+  background:
+    linear-gradient(135deg, transparent 0 45%, #808080 45% 55%, transparent 55%) 0 0 / 6px 6px,
+    #c0c0c0 !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-taskbar {
+  position: fixed !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  gap: 6px !important;
+  align-items: center !important;
+  height: 30px !important;
+  padding: 3px !important;
+  border-top: 2px outset #ffffff !important;
+  background: #c0c0c0 !important;
+  font: 12px Arial, Helvetica, sans-serif !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-taskbar span {
+  min-width: 0 !important;
+  padding: 3px 8px !important;
+  border: 2px inset #ffffff !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+html.retrofy-desktop-active .retrofy-win95-taskbar time {
+  padding: 3px 8px !important;
+  border: 2px inset #ffffff !important;
+}
+
 @media (max-width: 620px) {
   html.retrofy-page-active .retrofy-page-corner {
     position: static !important;

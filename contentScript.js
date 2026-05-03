@@ -3,6 +3,8 @@
   const chromeId = "retrofy-page-chrome";
   const browserClass = "retrofy-browser-active";
   const browserId = "retrofy-browser-frame";
+  const desktopClass = "retrofy-desktop-active";
+  const desktopId = "retrofy-win95-desktop";
   const effectsId = "retrofy-page-effects";
   const loaderId = "retrofy-page-loader";
   const modeClasses = ["retrofy-mode-soft", "retrofy-mode-chaos", "retrofy-mode-pure-html"];
@@ -18,6 +20,7 @@
   window.retrofyPage = {
     enable,
     browser,
+    desktop,
     export: exportHtml,
     disable
   };
@@ -25,9 +28,10 @@
   async function enable(_pageUrl, mode = "soft") {
     await showFakeLoader();
     document.documentElement.classList.add(rootClass);
-    document.documentElement.classList.remove(browserClass);
+    document.documentElement.classList.remove(browserClass, desktopClass);
     setMode(mode);
     document.getElementById(browserId)?.remove();
+    document.getElementById(desktopId)?.remove();
 
     if (mode === "pure-html") {
       document.getElementById(chromeId)?.remove();
@@ -59,11 +63,24 @@
     enableMouseTrail();
   }
 
+  async function desktop(pageUrl, mode = "soft", cssText = "") {
+    await showFakeLoader();
+    document.documentElement.classList.add(rootClass, desktopClass);
+    document.documentElement.classList.remove(browserClass);
+    setMode(mode);
+    document.getElementById(chromeId)?.remove();
+    document.getElementById(browserId)?.remove();
+    addWin95Desktop(pageUrl, mode, cssText);
+    addRetroEffects();
+    enableMouseTrail();
+  }
+
   function disable() {
-    document.documentElement.classList.remove(rootClass, browserClass);
+    document.documentElement.classList.remove(rootClass, browserClass, desktopClass);
     document.documentElement.classList.remove(...modeClasses);
     document.getElementById(chromeId)?.remove();
     document.getElementById(browserId)?.remove();
+    document.getElementById(desktopId)?.remove();
     document.getElementById(effectsId)?.remove();
     document.getElementById(loaderId)?.remove();
     document.querySelectorAll(`.${sparkleClass}`).forEach((sparkle) => sparkle.remove());
@@ -281,6 +298,130 @@
     frame.addEventListener("click", handleBrowserClick);
     frame.addEventListener("keydown", handleBrowserKeydown);
     document.body.prepend(frame);
+  }
+
+  function addWin95Desktop(pageUrl, mode, cssText) {
+    document.getElementById(desktopId)?.remove();
+
+    if (!document.body) {
+      return;
+    }
+
+    const desktop = document.createElement("div");
+    desktop.id = desktopId;
+    desktop.innerHTML = `
+      <div class="retrofy-win95-icon">
+        <div class="retrofy-win95-icon-art"></div>
+        <span>My Page</span>
+      </div>
+      <div class="retrofy-win95-window" style="left: 48px; top: 46px; width: min(860px, calc(100vw - 96px)); height: min(620px, calc(100vh - 116px));">
+        <div class="retrofy-win95-titlebar" data-retrofy-drag-handle>
+          <span>${escapeAttribute(document.title || "Current Page")}</span>
+          <button type="button" data-retrofy-desktop-close title="Close">X</button>
+        </div>
+        <div class="retrofy-win95-menubar">File&nbsp;&nbsp;Edit&nbsp;&nbsp;View&nbsp;&nbsp;Window&nbsp;&nbsp;Help</div>
+        <div class="retrofy-win95-address">Address: ${escapeAttribute(pageUrl || location.href)}</div>
+        <iframe title="Retro desktop page snapshot" sandbox="" srcdoc="${escapeAttribute(getDesktopSnapshot(mode, cssText))}"></iframe>
+        <div class="retrofy-win95-resizer" data-retrofy-resize-handle></div>
+      </div>
+      <div class="retrofy-win95-taskbar">
+        <button type="button">Start</button>
+        <span>Retrofy Page</span>
+        <time>${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</time>
+      </div>
+    `;
+
+    desktop.querySelector("[data-retrofy-desktop-close]")?.addEventListener("click", () => {
+      disable();
+      chrome.runtime?.sendMessage?.({ type: "retrofy:removeCss" });
+    });
+
+    makeDesktopWindowInteractive(desktop);
+    document.body.append(desktop);
+  }
+
+  function getDesktopSnapshot(mode, cssText) {
+    const clone = document.documentElement.cloneNode(true);
+    const snapshotMode = modeClasses.includes(`retrofy-mode-${mode}`) ? mode : "soft";
+    clone.classList.add(rootClass, `retrofy-mode-${snapshotMode}`);
+    clone.classList.remove(browserClass, desktopClass);
+    clone.querySelector(`#${loaderId}`)?.remove();
+    clone.querySelector(`#${desktopId}`)?.remove();
+    clone.querySelector(`#${browserId}`)?.remove();
+    clone.querySelectorAll(`.${sparkleClass}`).forEach((sparkle) => sparkle.remove());
+
+    if (snapshotMode === "pure-html") {
+      clone.querySelector(`#${chromeId}`)?.remove();
+      clone.querySelector(`#${effectsId}`)?.remove();
+    } else {
+      ensureExportChrome(clone, snapshotMode);
+    }
+
+    let head = clone.querySelector("head");
+
+    if (!head) {
+      head = document.createElement("head");
+      clone.insertBefore(head, clone.firstChild);
+    }
+
+    const base = document.createElement("base");
+    base.href = location.href;
+    const style = document.createElement("style");
+    style.textContent = cssText;
+    head.prepend(style);
+    head.prepend(base);
+
+    return `<!doctype html>\n${clone.outerHTML}`;
+  }
+
+  function makeDesktopWindowInteractive(desktop) {
+    const win = desktop.querySelector(".retrofy-win95-window");
+    const dragHandle = desktop.querySelector("[data-retrofy-drag-handle]");
+    const resizeHandle = desktop.querySelector("[data-retrofy-resize-handle]");
+
+    dragHandle?.addEventListener("mousedown", (event) => {
+      event.preventDefault();
+      const rect = win.getBoundingClientRect();
+      const offsetX = event.clientX - rect.left;
+      const offsetY = event.clientY - rect.top;
+
+      const move = (moveEvent) => {
+        const maxLeft = window.innerWidth - 120;
+        const maxTop = window.innerHeight - 90;
+        win.style.left = `${Math.max(0, Math.min(maxLeft, moveEvent.clientX - offsetX))}px`;
+        win.style.top = `${Math.max(0, Math.min(maxTop, moveEvent.clientY - offsetY))}px`;
+      };
+
+      const stop = () => {
+        document.removeEventListener("mousemove", move);
+        document.removeEventListener("mouseup", stop);
+      };
+
+      document.addEventListener("mousemove", move);
+      document.addEventListener("mouseup", stop);
+    });
+
+    resizeHandle?.addEventListener("mousedown", (event) => {
+      event.preventDefault();
+      const rect = win.getBoundingClientRect();
+      const startX = event.clientX;
+      const startY = event.clientY;
+
+      const resize = (moveEvent) => {
+        const width = Math.max(320, Math.min(window.innerWidth - rect.left - 8, rect.width + moveEvent.clientX - startX));
+        const height = Math.max(240, Math.min(window.innerHeight - rect.top - 34, rect.height + moveEvent.clientY - startY));
+        win.style.width = `${width}px`;
+        win.style.height = `${height}px`;
+      };
+
+      const stop = () => {
+        document.removeEventListener("mousemove", resize);
+        document.removeEventListener("mouseup", stop);
+      };
+
+      document.addEventListener("mousemove", resize);
+      document.addEventListener("mouseup", stop);
+    });
   }
 
   function handleBrowserClick(event) {

@@ -11,6 +11,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
   - mode selector: `Soft 90s`, `GeoCities Chaos`, `Pure HTML`
   - `Retrofy this page`
   - `Open Retro Browser`
+  - `Windows 95 Desktop`
   - `Export as .htm`
   - `Remove retro mode`
   - `Support the project` footer link
@@ -20,6 +21,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 - Friendly errors on restricted pages such as `chrome://extensions`.
 - Works best on ordinary pages such as Wikipedia, blogs, news articles, and simple company pages.
 - Retro Browser controls navigate the current tab. After a full page load, reopen Retro Browser from the popup if the frame is gone.
+- Windows 95 Desktop opens a draggable and resizable fake desktop window with a snapshot of the current page inside.
 - Extra retro effects include CRT scanlines, pixel-style cursors, mouse sparkles, marquee/blink text, rainbow headings, and CSS pixel-art under construction flair.
 - `Retrofy this page` plays a short inline 56k-style dial-up sound with no external audio request.
 - A fake `Loading... 28.8 kbps` overlay appears before applying retro mode.
@@ -44,15 +46,16 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 6. Try `Pure HTML` and confirm the page becomes stripped back and mostly unstyled.
 7. Click `Open Retro Browser`.
 8. Confirm the page gets a retro browser frame with working Back, Forward, Stop, Refresh, Home, and address bar navigation.
-9. Click `Export as .htm` and confirm Chrome downloads a standalone `.htm` file.
-10. Click the `X` in the Retro Browser titlebar and confirm retro mode closes.
-11. Open Retro Browser again, then click `Refresh`, `Home`, or enter a new URL in the address bar.
-12. Confirm the status bar warns you that the frame may disappear after navigation.
-13. Reopen Retro Browser from the popup if the frame is gone after the new page loads.
-14. Click `Remove retro mode`.
-15. Confirm the page returns to normal.
-16. Open a restricted page such as `chrome://extensions`.
-17. Click `Retrofy this page` and confirm the popup shows a friendly error.
+9. Click `Windows 95 Desktop` and confirm a fake desktop opens with the page snapshot in a draggable/resizable window.
+10. Click `Export as .htm` and confirm Chrome downloads a standalone `.htm` file.
+11. Click the `X` in the Retro Browser titlebar or desktop window and confirm retro mode closes.
+12. Open Retro Browser again, then click `Refresh`, `Home`, or enter a new URL in the address bar.
+13. Confirm the status bar warns you that the frame may disappear after navigation.
+14. Reopen Retro Browser from the popup if the frame is gone after the new page loads.
+15. Click `Remove retro mode`.
+16. Confirm the page returns to normal.
+17. Open a restricted page such as `chrome://extensions`.
+18. Click `Retrofy this page` and confirm the popup shows a friendly error.
 
 ## Privacy
 
