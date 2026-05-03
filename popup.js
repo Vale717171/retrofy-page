@@ -9,21 +9,21 @@ const statusEl = document.getElementById("status");
 
 const restrictedProtocols = ["chrome:", "edge:", "about:", "brave:", "opera:", "vivaldi:"];
 const real90sSites = [
-  "http://www.yahoo.com/",
-  "http://www.altavista.com/",
-  "http://www.geocities.com/",
-  "http://www.netscape.com/",
-  "http://www.microsoft.com/",
-  "http://www.apple.com/",
-  "http://www.cnn.com/",
-  "http://www.nasa.gov/",
-  "http://www.imdb.com/",
-  "http://www.wired.com/",
-  "http://www.hotwired.com/",
-  "http://www.lycos.com/",
-  "http://www.excite.com/",
-  "http://www.slashdot.org/",
-  "http://www.theonion.com/"
+  "www.yahoo.com",
+  "www.altavista.com",
+  "www.geocities.com",
+  "www.netscape.com",
+  "www.microsoft.com",
+  "www.apple.com",
+  "www.cnn.com",
+  "www.nasa.gov",
+  "www.imdb.com",
+  "www.wired.com",
+  "www.hotwired.com",
+  "www.lycos.com",
+  "www.excite.com",
+  "www.slashdot.org",
+  "www.theonion.com"
 ];
 
 retrofyButton.addEventListener("click", () => runOnActiveTab("enable"));
@@ -159,7 +159,7 @@ async function updateNavigationState(tabId, action, mode) {
 function openReal90sPage() {
   const site = real90sSites[Math.floor(Math.random() * real90sSites.length)];
   const year = 1996 + Math.floor(Math.random() * 4);
-  const url = `https://web.archive.org/web/${year}/${site}`;
+  const url = `https://web.archive.org/web/${year}/${site}/`;
   chrome.tabs.create({ url });
 }
 
