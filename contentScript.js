@@ -519,6 +519,10 @@
   }
 
   function enableMouseTrail() {
+    if (!supportsMouseTrail()) {
+      return;
+    }
+
     if (isMouseTrailActive) {
       return;
     }
@@ -561,6 +565,10 @@
     document.body.append(sparkle);
 
     window.setTimeout(() => sparkle.remove(), 700);
+  }
+
+  function supportsMouseTrail() {
+    return window.matchMedia?.("(pointer: fine)")?.matches && !("ontouchstart" in window);
   }
 
   function normalizeAddress(value) {
