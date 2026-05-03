@@ -25,6 +25,7 @@ async function runOnActiveTab(action) {
     }
 
     if (action === "enable" || action === "browser") {
+      await removeRetrofyCss(tab.id);
       await chrome.scripting.insertCSS({
         target: { tabId: tab.id },
         files: ["retrofy.css"]
@@ -43,6 +44,10 @@ async function runOnActiveTab(action) {
         window.retrofyPage?.[requestedAction]?.(pageUrl);
       }
     });
+
+    if (action === "disable") {
+      await removeRetrofyCss(tab.id);
+    }
 
     setStatus(getSuccessMessage(action));
   } catch (error) {
@@ -69,6 +74,17 @@ function setButtonsDisabled(isDisabled) {
   retrofyButton.disabled = isDisabled;
   retroBrowserButton.disabled = isDisabled;
   removeButton.disabled = isDisabled;
+}
+
+async function removeRetrofyCss(tabId) {
+  try {
+    await chrome.scripting.removeCSS({
+      target: { tabId },
+      files: ["retrofy.css"]
+    });
+  } catch {
+    // The stylesheet may not be present yet, which is fine.
+  }
 }
 
 function getLoadingMessage(action) {

@@ -194,9 +194,36 @@ html.retrofy-browser-active .retrofy-browser-titlebar {
 }
 
 html.retrofy-browser-active .retrofy-browser-window-buttons {
+  display: inline-flex !important;
+  gap: 4px !important;
+  align-items: center !important;
   color: #ffffff !important;
   font-family: "Courier New", Courier, monospace !important;
   white-space: nowrap !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-window-buttons span,
+html.retrofy-browser-active .retrofy-browser-window-buttons button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 18px !important;
+  height: 18px !important;
+  padding: 0 3px !important;
+  border: 1px outset #ffffff !important;
+  border-radius: 0 !important;
+  color: #000000 !important;
+  background: #c0c0c0 !important;
+  font: 700 11px "Courier New", Courier, monospace !important;
+  line-height: 1 !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-window-buttons button {
+  cursor: pointer !important;
+}
+
+html.retrofy-browser-active .retrofy-browser-window-buttons button:active {
+  border-style: inset !important;
 }
 
 html.retrofy-browser-active .retrofy-browser-menubar {

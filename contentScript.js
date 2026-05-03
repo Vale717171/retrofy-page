@@ -67,11 +67,14 @@
 
     const frame = document.createElement("div");
     frame.id = browserId;
-    frame.setAttribute("aria-hidden", "true");
     frame.innerHTML = `
       <div class="retrofy-browser-titlebar">
         <span>Retro Browser 0.9</span>
-        <span class="retrofy-browser-window-buttons">_ [] X</span>
+        <span class="retrofy-browser-window-buttons" aria-label="Window controls">
+          <span title="Minimize">_</span>
+          <span title="Maximize">[]</span>
+          <button type="button" data-retrofy-browser-action="close" title="Close Retro Browser">X</button>
+        </span>
       </div>
       <div class="retrofy-browser-menubar">File&nbsp;&nbsp;Edit&nbsp;&nbsp;View&nbsp;&nbsp;Go&nbsp;&nbsp;Bookmarks&nbsp;&nbsp;Help</div>
       <div class="retrofy-browser-toolbar">
@@ -115,12 +118,12 @@
 
   function runBrowserAction(action) {
     if (action === "back") {
-      history.back();
+      navigateWithNotice(() => history.back());
       return;
     }
 
     if (action === "forward") {
-      history.forward();
+      navigateWithNotice(() => history.forward());
       return;
     }
 
@@ -131,12 +134,18 @@
     }
 
     if (action === "refresh") {
-      location.reload();
+      navigateWithNotice(() => location.reload());
       return;
     }
 
     if (action === "home") {
-      location.assign(location.origin);
+      navigateWithNotice(() => location.assign(location.origin));
+      return;
+    }
+
+    if (action === "close") {
+      disable();
+      chrome.runtime?.sendMessage?.({ type: "retrofy:removeCss" });
     }
   }
 
@@ -148,7 +157,12 @@
       return;
     }
 
-    location.assign(url);
+    navigateWithNotice(() => location.assign(url));
+  }
+
+  function navigateWithNotice(navigate) {
+    updateBrowserStatus("Loading... reopen Retro Browser from the popup if the frame disappears.");
+    window.setTimeout(navigate, 250);
   }
 
   function normalizeAddress(value) {

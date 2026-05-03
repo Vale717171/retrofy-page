@@ -36,12 +36,14 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 4. Confirm the page switches to a 1990s-style look.
 5. Click `Open Retro Browser`.
 6. Confirm the page gets a retro browser frame with working Back, Forward, Stop, Refresh, Home, and address bar navigation.
-7. Click `Refresh`, `Home`, or enter a new URL in the address bar.
-8. Reopen Retro Browser from the popup if the frame is gone after the new page loads.
-9. Click `Remove retro mode`.
-10. Confirm the page returns to normal.
-11. Open a restricted page such as `chrome://extensions`.
-12. Click `Retrofy this page` and confirm the popup shows a friendly error.
+7. Click the `X` in the Retro Browser titlebar and confirm retro mode closes.
+8. Open Retro Browser again, then click `Refresh`, `Home`, or enter a new URL in the address bar.
+9. Confirm the status bar warns you that the frame may disappear after navigation.
+10. Reopen Retro Browser from the popup if the frame is gone after the new page loads.
+11. Click `Remove retro mode`.
+12. Confirm the page returns to normal.
+13. Open a restricted page such as `chrome://extensions`.
+14. Click `Retrofy this page` and confirm the popup shows a friendly error.
 
 ## Privacy
 
@@ -53,6 +55,7 @@ Retrofy Page does not track users, collect data, call a backend, or load externa
 - `popup.html` renders the toolbar popup.
 - `popup.css` styles the popup.
 - `popup.js` handles popup actions and active-tab injection.
+- `background.js` removes injected CSS when Retro Browser is closed from inside the page.
 - `contentScript.js` toggles page state, small retro decorations, and the Retro Browser frame.
 - `retrofy.css` contains the reversible visual treatment.
 
