@@ -7,9 +7,16 @@
     "default_popup": "popup.html",
     "default_title": "Retrofy Page"
   },
+  "background": {
+    "service_worker": "background.js"
+  },
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ],
-  "host_permissions": []
+  "host_permissions": [],
+  "optional_host_permissions": [
+    "<all_urls>"
+  ]
 }

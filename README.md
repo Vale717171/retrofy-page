@@ -17,7 +17,7 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 - Reversible effect.
 - Friendly errors on restricted pages such as `chrome://extensions`.
 - Works best on ordinary pages such as Wikipedia, blogs, news articles, and simple company pages.
-- Retro Browser controls navigate the current tab. After a full page load, reopen Retro Browser from the popup if the frame is gone.
+- Retro Browser controls navigate the current tab and can stay open across page loads when optional site access is granted.
 
 ## Install locally
 
@@ -36,14 +36,19 @@ This is an MVP. It does not include analytics, a backend, external requests, or 
 4. Confirm the page switches to a 1990s-style look.
 5. Click `Open Retro Browser`.
 6. Confirm the page gets a retro browser frame with working Back, Forward, Stop, Refresh, Home, and address bar navigation.
-7. Click `Remove retro mode`.
-8. Confirm the page returns to normal.
-9. Open a restricted page such as `chrome://extensions`.
-10. Click `Retrofy this page` and confirm the popup shows a friendly error.
+7. If Chrome asks for site access, approve it to test persistent Retro Browser navigation.
+8. Click `Refresh`, `Home`, or enter a new URL in the address bar.
+9. Confirm Retro Browser comes back after the page loads.
+10. Click `Remove retro mode`.
+11. Confirm the page returns to normal.
+12. Open a restricted page such as `chrome://extensions`.
+13. Click `Retrofy this page` and confirm the popup shows a friendly error.
 
 ## Privacy
 
 Retrofy Page does not track users, collect data, call a backend, or load external scripts. The only external URL is the visible `Support the project` link in the popup footer, which opens only when clicked.
+
+Retro Browser uses optional site access only when you choose to enable persistent navigation. This lets the extension restore the Retro Browser frame after the current tab loads a new ordinary webpage.
 
 ## Project structure
 
@@ -51,6 +56,7 @@ Retrofy Page does not track users, collect data, call a backend, or load externa
 - `popup.html` renders the toolbar popup.
 - `popup.css` styles the popup.
 - `popup.js` handles popup actions and active-tab injection.
+- `background.js` restores persistent Retro Browser tabs after navigation.
 - `contentScript.js` toggles page state, small retro decorations, and the Retro Browser frame.
 - `retrofy.css` contains the reversible visual treatment.
 

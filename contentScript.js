@@ -53,7 +53,15 @@
   }
 
   function addRetroBrowser(pageUrl) {
-    if (document.getElementById(browserId) || !document.body) {
+    const existingFrame = document.getElementById(browserId);
+
+    if (existingFrame) {
+      updateBrowserAddress(pageUrl || location.href);
+      updateBrowserStatus("Done");
+      return;
+    }
+
+    if (!document.body) {
       return;
     }
 
@@ -166,6 +174,14 @@
 
     if (status) {
       status.textContent = message;
+    }
+  }
+
+  function updateBrowserAddress(pageUrl) {
+    const address = document.querySelector("#retrofy-browser-frame .retrofy-browser-address input");
+
+    if (address) {
+      address.value = pageUrl;
     }
   }
 
