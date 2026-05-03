@@ -6,103 +6,124 @@
   <title>Retrofy Page Store Screenshots</title>
   <style>
     * { box-sizing: border-box; }
-    html, body { margin: 0; width: 1280px; height: 800px; overflow: hidden; }
-    body { background: #f3f4f6; color: #202122; font: 15px/1.48 Arial, Helvetica, sans-serif; }
-    a { color: #0645ad; }
-    .shot { width: 1280px; height: 800px; display: none; background: #f8f9fa; }
+    html, body { width: 1280px; height: 800px; margin: 0; overflow: hidden; }
+    body { background: #f8f9fa; color: #202122; font: 15px/1.45 Arial, Helvetica, sans-serif; }
+    .shot { display: none; width: 1280px; height: 800px; background: #f8f9fa; }
     .shot.is-active { display: block; }
-    .canvas { width: 100%; height: 100%; padding: 34px 42px; }
-    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; height: 100%; }
-    .panel { min-width: 0; height: 100%; overflow: hidden; border: 1px solid #d0d7de; background: #fff; }
-    .panel-title { height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; border-bottom: 1px solid #d8dee4; background: #fff; font-weight: 700; }
-    .label { color: #57606a; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
-    .modern-layout { display: grid; grid-template-columns: 182px 1fr; min-height: 100%; background: #fff; }
-    .modern-sidebar { border-right: 1px solid #eaecf0; padding: 22px 18px; color: #54595d; background: #f8f9fa; }
-    .modern-logo { font: 700 28px Georgia, serif; color: #202122; margin-bottom: 24px; }
-    .modern-sidebar div { margin: 9px 0; font-size: 13px; }
-    .article { padding: 26px 34px 46px; overflow: hidden; }
-    .article h1 { margin: 0 0 8px; font: 37px/1.15 Georgia, "Times New Roman", serif; font-weight: 400; border-bottom: 1px solid #a2a9b1; }
-    .article .meta { color: #54595d; font-size: 13px; margin: 0 0 18px; }
-    .article h2 { margin: 24px 0 8px; font: 24px/1.2 Georgia, "Times New Roman", serif; border-bottom: 1px solid #a2a9b1; }
-    .article p { margin: 0 0 13px; max-width: 760px; }
-    .infobox { float: right; width: 222px; margin: 2px 0 18px 24px; border: 1px solid #a2a9b1; background: #f8f9fa; font-size: 13px; }
-    .infobox strong { display: block; background: #dbe8ff; padding: 8px; text-align: center; }
-    .infobox .screen { height: 120px; margin: 10px; border: 1px solid #a2a9b1; background:
-      linear-gradient(90deg, #d8dee9 0 50%, transparent 50%) 0 0 / 18px 18px,
-      linear-gradient(#f7fbff, #dbeafe); }
-    .infobox dl { display: grid; grid-template-columns: 72px 1fr; gap: 5px 8px; padding: 0 10px 12px; margin: 0; }
-    .infobox dt { font-weight: 700; }
-    .toc { width: 260px; border: 1px solid #a2a9b1; background: #f8f9fa; padding: 10px 12px; margin: 16px 0; font-size: 13px; }
+    .canvas { width: 100%; height: 100%; padding: 28px 36px; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; height: 100%; }
+    .panel { height: 100%; overflow: hidden; background: #fff; border: 1px solid #a2a9b1; }
+    .panel-title { height: 38px; padding: 9px 14px; border-bottom: 1px solid #a2a9b1; background: #f8f9fa; font-weight: 700; }
+    .wiki { display: grid; grid-template-columns: 170px 1fr; height: 100%; background: #fff; }
+    .wiki-sidebar { border-right: 1px solid #eaecf0; padding: 22px 16px; background: #f8f9fa; color: #54595d; font-size: 13px; }
+    .wiki-logo { margin-bottom: 24px; color: #202122; font: 700 28px Georgia, serif; }
+    .wiki-sidebar div:not(.wiki-logo) { margin: 9px 0; }
+    .article { padding: 24px 30px 50px; overflow: hidden; }
+    .article h1 { margin: 0 0 10px; padding-bottom: 6px; border-bottom: 1px solid #a2a9b1; font: 37px/1.1 Georgia, "Times New Roman", serif; font-weight: 400; }
+    .article h2 { margin: 22px 0 8px; padding-bottom: 3px; border-bottom: 1px solid #a2a9b1; font: 24px/1.15 Georgia, "Times New Roman", serif; font-weight: 400; }
+    .article p { margin: 0 0 12px; max-width: 760px; }
+    .article a { color: #0645ad; }
+    .meta { color: #54595d; font-size: 13px; }
+    .infobox { float: right; width: 218px; margin: 0 0 18px 24px; border: 1px solid #a2a9b1; background: #f8f9fa; font-size: 13px; }
+    .infobox strong { display: block; padding: 8px; text-align: center; background: #dbe8ff; }
+    .infobox .image { height: 112px; margin: 10px; border: 1px solid #a2a9b1; background: linear-gradient(#eaf3ff, #c8d6e8); }
+    .infobox dl { display: grid; grid-template-columns: 70px 1fr; gap: 5px 8px; margin: 0; padding: 0 10px 12px; }
+    .toc { width: 250px; margin: 16px 0; padding: 9px 12px; border: 1px solid #a2a9b1; background: #f8f9fa; font-size: 13px; }
     .toc b { display: block; margin-bottom: 6px; }
-    .toc ol { margin: 0 0 0 20px; padding: 0; }
-    .retro-page { height: 100%; overflow: hidden; font-family: "Times New Roman", Times, serif; background: #c0c0c0; color: #000; border: 4px outset #eee; padding: 18px; position: relative; }
-    .retro-page:before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,.08) 0 1px, transparent 1px 4px); opacity: .22; }
-    .retro-shell { position: relative; background: #e6e6e6; border: 3px inset #fff; padding: 14px; min-height: 100%; }
-    .retro-banner { background: navy; color: yellow; border: 3px outset #fff; font: 700 20px Arial, sans-serif; padding: 8px 12px; text-align: center; margin-bottom: 14px; }
-    .retro-page h1 { font: 700 38px "Times New Roman", Times, serif; color: #800080; text-align: center; margin: 8px 0 10px; }
-    .retro-page h2 { color: #000080; border-bottom: 2px groove #fff; margin-top: 18px; }
-    .retro-page a { color: #00e; text-decoration: underline; }
-    .retro-page .visited { color: #551a8b; }
-    .retro-page button, .retro-button { border: 3px outset #fff; background: #c0c0c0; padding: 5px 10px; font: 700 13px Arial, sans-serif; }
-    .counter { display: inline-block; margin-top: 8px; padding: 5px 8px; background: #000; color: #39ff14; font: 700 18px "Courier New", monospace; border: 2px inset #777; }
-    .construction { display: inline-flex; align-items: center; gap: 8px; margin: 10px 0; padding: 7px 10px; background: #ff0; border: 3px dashed #000; font: 700 14px Arial, sans-serif; }
-    .worker { width: 24px; height: 24px; background: linear-gradient(#ff0 0 35%, #111 35% 46%, #fa0 46% 62%, #00f 62%); border: 2px solid #000; image-rendering: pixelated; }
-    .net { display: inline-block; padding: 4px 8px; border: 2px outset #fff; background: #000080; color: #fff; font: 700 12px Arial, sans-serif; }
-    .chaos { background-color: #ff00ff; background-image: repeating-linear-gradient(45deg, #00ffff 0 12px, #ffff00 12px 24px, #ff00ff 24px 36px); color: #000; }
-    .chaos .retro-shell { background: #ffff99; border: 5px ridge #00f; }
-    .chaos h1 { color: transparent; background: linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, violet); -webkit-background-clip: text; background-clip: text; font-size: 44px; text-shadow: 2px 2px #000; }
-    .chaos .retro-banner { background: #000; color: #0f0; border-color: #ff0; }
-    .chaos p { background: rgba(255,255,255,.72); padding: 4px; }
-    .chaos .starbar { font: 700 18px "Comic Sans MS", Arial, sans-serif; color: #ff0; text-shadow: 1px 1px #000; white-space: nowrap; margin-bottom: 10px; }
-    .pure { padding: 28px 42px; background: #fff; color: #000; font: 16px "Times New Roman", Times, serif; overflow: hidden; }
-    .pure h1 { font-size: 34px; margin: 0 0 12px; }
-    .pure h2 { font-size: 24px; margin: 22px 0 8px; }
-    .pure table { border-collapse: separate; border-spacing: 2px; width: 78%; }
-    .pure td, .pure th { border: 1px solid #999; padding: 5px; }
-    .popup-demo { position: relative; }
-    .popup-card { position: absolute; top: 74px; right: 70px; width: 338px; background: #f6f1e4; color: #1f2933; border: 1px solid #111827; box-shadow: 0 14px 34px rgba(0,0,0,.28); font-family: Arial, Helvetica, sans-serif; padding: 16px; z-index: 4; }
-    .popup-card h3 { margin: 0; font-size: 20px; }
-    .popup-card .sub { margin: 4px 0 14px; color: #52606d; font-size: 13px; }
-    .popup-card label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 5px; }
-    .popup-card select { width: 100%; height: 36px; border: 2px inset #fff; background: #fff; margin-bottom: 10px; }
-    .popup-card button { width: 100%; height: 39px; margin: 5px 0; border: 2px outset #fff; background: #d8d0bd; color: #111; font: 700 13px Arial, sans-serif; text-align: left; padding-left: 12px; }
-    .popup-card button.primary { background: #003399; color: #fff; }
-    .popup-card button[disabled] { color: #777; background: #ddd; }
-    .popup-card footer { margin-top: 12px; padding-top: 10px; border-top: 1px solid #c8bfae; font-size: 12px; }
-    .popup-card footer a { color: #0645ad; }
-    .full { padding: 0; }
+    .toc ol { margin: 0 0 0 18px; padding: 0; }
+
+    .retro-active, .retro-active body { background: #c0c0c0; color: #000; font-family: "Times New Roman", Times, serif; }
+    .retro-wrap { position: relative; height: 100%; overflow: hidden; padding: 18px; background: #c0c0c0; border: 3px outset #fff; }
+    .retro-wrap:after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,.08) 0 1px, transparent 1px 4px); opacity: .22; }
+    .retro-body { position: relative; z-index: 1; height: 100%; overflow: hidden; padding: 14px; background: #d8d8d8; border: 2px inset #fff; }
+    .retro-marquee { margin-bottom: 10px; padding: 7px; overflow: hidden; border: 2px outset #fff; background: #000080; color: #ffff00; font: 700 15px Arial, Helvetica, sans-serif; white-space: nowrap; }
+    .retro-banner { display: inline-block; margin-bottom: 10px; padding: 6px 10px; border: 2px outset #fff; background: #000080; color: #fff; font: 700 12px Arial, Helvetica, sans-serif; }
+    .retro-body h1, .retro-body h2 { color: transparent; background: linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, violet); -webkit-background-clip: text; background-clip: text; font-family: "Times New Roman", Times, serif; font-weight: 700; }
+    .retro-body h1 { margin: 0 0 10px; font-size: 42px; line-height: 1.05; }
+    .retro-body h2 { margin: 18px 0 8px; font-size: 25px; }
+    .retro-body p { margin: 0 0 12px; font-size: 17px; }
+    .retro-body a { color: #0000ee; text-decoration: underline; }
+    .retro-body a.visited { color: #551a8b; }
+    .retro-body button, .retro-button { border: 2px outset #fff; border-radius: 0; background: #e2e2e2; color: #000; padding: 6px 10px; font: 700 13px Arial, Helvetica, sans-serif; }
+    .construction { display: inline-flex; align-items: center; gap: 8px; margin: 8px 0 10px; padding: 7px 10px; border: 3px dashed #000; background: #ffff00; font: 700 13px Arial, Helvetica, sans-serif; }
+    .worker { width: 24px; height: 24px; border: 2px solid #000; background: linear-gradient(#ff0 0 35%, #111 35% 46%, #fa0 46% 62%, #00f 62%); }
+    .counter { display: inline-block; margin-top: 8px; padding: 5px 8px; border: 2px inset #777; background: #000; color: #39ff14; font: 700 18px "Courier New", monospace; }
+    .corner { position: absolute; right: 16px; bottom: 16px; width: 185px; padding: 9px; border: 2px outset #fff; background: #ffffcc; font: 700 13px Arial, Helvetica, sans-serif; }
+
+    .chaos { background-color: #ff00ff; background-image: repeating-linear-gradient(45deg, #00ffff 0 16px, #ffff00 16px 32px, #ff00ff 32px 48px); }
+    .chaos .retro-body { background: #ffff99; border: 4px ridge #0000ff; }
+    .chaos-strip { display: block; margin-bottom: 9px; padding: 7px; border: 3px outset #ffff00; background: #000; color: #00ff00; font: 700 15px "Comic Sans MS", Arial, sans-serif; white-space: nowrap; }
+    .chaos p { padding: 4px; background: rgba(255,255,255,.78); }
+
+    .pure { height: 100%; overflow: hidden; padding: 30px 42px; background: #fff; color: #000; font: 16px "Times New Roman", Times, serif; }
+    .pure h1 { margin: 0 0 12px; font-size: 34px; }
+    .pure h2 { margin: 22px 0 8px; font-size: 24px; }
+    .pure table { width: 76%; border-spacing: 2px; }
+    .pure td, .pure th { padding: 5px; border: 1px solid #999; }
+    .pure a { color: #00e; }
+
+    .browser-frame { position: absolute; left: 30px; right: 30px; top: 24px; z-index: 4; border: 2px outset #fff; background: #c0c0c0; font-family: Arial, Helvetica, sans-serif; }
+    .browser-title { display: flex; justify-content: space-between; align-items: center; padding: 5px 8px; background: #000080; color: #fff; font-weight: 700; }
+    .browser-title button, .browser-title span span { width: 22px; height: 20px; margin-left: 4px; border: 2px outset #fff; background: #c0c0c0; color: #000; font-weight: 700; }
+    .browser-menu, .browser-status { padding: 5px 8px; border-top: 1px solid #808080; font-size: 13px; }
+    .browser-tools { display: flex; gap: 6px; padding: 6px 8px; border-top: 1px solid #808080; }
+    .browser-tools button { border: 2px outset #fff; background: #e2e2e2; font: 700 12px Arial, Helvetica, sans-serif; }
+    .browser-address { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-top: 1px solid #808080; font-size: 13px; }
+    .browser-address input { flex: 1; height: 26px; border: 2px inset #fff; border-radius: 0; font: 13px Arial, Helvetica, sans-serif; }
+    .with-browser { padding-top: 154px; }
+
+    .popup-card {
+      position: absolute;
+      top: 70px;
+      right: 58px;
+      width: 300px;
+      background: #cfcfcf;
+      border: 2px outset #f1f1f1;
+      padding: 12px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #111;
+      z-index: 5;
+    }
+    .popup-head { margin-bottom: 12px; padding: 8px; border: 2px inset #f1f1f1; background: #eee; }
+    .popup-head h3 { margin: 0 0 6px; font: 700 24px/1.05 "Times New Roman", Times, serif; }
+    .popup-head p { margin: 0; font-size: 13px; line-height: 1.35; }
+    .mode-picker { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 8px; align-items: center; margin-bottom: 10px; padding: 6px; border: 2px inset #f1f1f1; background: #eee; font-size: 12px; }
+    .mode-picker label { font-weight: 700; }
+    .mode-picker select { width: 100%; height: 28px; border: 2px inset #fff; border-radius: 0; background: #fff; font: 12px Arial, Helvetica, sans-serif; }
+    .popup-actions { display: grid; gap: 8px; }
+    .popup-actions button { width: 100%; min-height: 34px; padding: 6px 8px; border: 2px outset #fff; border-radius: 0; background: #e2e2e2; color: #000; box-shadow: none; font: 700 13px Arial, Helvetica, sans-serif; }
+    .popup-status { min-height: 35px; margin-top: 10px; padding: 6px; border: 1px solid #8b8b8b; background: #f7f7c6; font-size: 12px; }
+    .popup-card footer { margin-top: 10px; text-align: center; font-size: 12px; }
+    .popup-card a { color: #00e; text-decoration: underline; }
   </style>
 </head>
 <body>
   <section id="shot1" class="shot">
-    <div class="canvas">
-      <div class="split">
-        <div class="panel">
-          <div class="panel-title"><span>Before</span><span class="label">Modern article</span></div>
-          <div class="modern-layout" style="height:calc(100% - 44px)">
-            <aside class="modern-sidebar"><div class="modern-logo">Wiki</div><div>Article</div><div>Talk</div><div>Read</div><div>View source</div><div>History</div></aside>
-            <main class="article"><div class="infobox"><strong>World Wide Web</strong><div class="screen"></div><dl><dt>Type</dt><dd>Information system</dd><dt>Created</dt><dd>1989</dd></dl></div><h1>World Wide Web</h1><p class="meta">From a collaborative encyclopedia-style page</p><p>The World Wide Web is an information system that lets documents and resources be accessed through web browsers.</p><p>Pages commonly include links, images, forms, tables, navigation, and references.</p><div class="toc"><b>Contents</b><ol><li>History</li><li>Web pages</li><li>Browsers</li></ol></div><h2>History</h2><p>Early web pages were simple, readable, and often hand-authored with basic HTML.</p></main>
-          </div>
+    <div class="canvas split">
+      <div class="panel">
+        <div class="panel-title">Before: ordinary article page</div>
+        <div class="wiki" style="height: calc(100% - 38px)">
+          <aside class="wiki-sidebar"><div class="wiki-logo">Wiki</div><div>Article</div><div>Talk</div><div>Read</div><div>View source</div><div>History</div></aside>
+          <main class="article"><div class="infobox"><strong>World Wide Web</strong><div class="image"></div><dl><dt>Type</dt><dd>Information system</dd><dt>Created</dt><dd>1989</dd></dl></div><h1>World Wide Web</h1><p class="meta">From a collaborative encyclopedia-style page</p><p>The World Wide Web is an information system that lets documents and resources be accessed through web browsers.</p><p>Pages commonly include links, images, forms, tables, navigation, and references.</p><div class="toc"><b>Contents</b><ol><li>History</li><li>Web pages</li><li>Browsers</li></ol></div><h2>History</h2><p>Early web pages were simple, readable, and often hand-authored with basic HTML.</p></main>
         </div>
-        <div class="panel">
-          <div class="panel-title"><span>After</span><span class="label">Soft 90s mode</span></div>
-          <div class="retro-page" style="height:calc(100% - 44px)"><div class="retro-shell"><div class="retro-banner">WELCOME TO MY PAGE</div><span class="net">Best viewed with Netscape Navigator</span><h1>World Wide Web</h1><p><a href="#">The World Wide Web</a> is an information system that lets documents and resources be accessed through web browsers.</p><p>Pages keep their content, but Retrofy Page swaps in old-school fonts, borders, buttons, and backgrounds.</p><div class="construction"><span class="worker"></span> Under construction</div><h2>Contents</h2><button>History</button> <button>Browsers</button><br><span class="counter">083147</span></div></div>
-        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">After: Soft 90s</div>
+        <div class="retro-wrap" style="height: calc(100% - 38px)"><div class="retro-body"><div class="retro-marquee">WELCOME TO MY PAGE - Best viewed in 800x600 - Sign my guestbook!</div><span class="retro-banner">Best viewed with Netscape Navigator</span><h1>World Wide Web</h1><p><a href="#">The World Wide Web</a> keeps the same article content while Retrofy Page changes typography, links, backgrounds, and borders.</p><p>Blue links, gray panels, scanlines, and chunky controls make the page feel late 1990s without hiding the text.</p><div class="construction"><span class="worker"></span> UNDER CONSTRUCTION</div><h2>Contents</h2><button>History</button> <button>Browsers</button><br><span class="counter">083147</span></div></div>
       </div>
     </div>
   </section>
 
-  <section id="shot2" class="shot"><div class="retro-page full"><div class="retro-shell" style="margin:34px 42px;"><div class="retro-banner">WELCOME TO MY PAGE</div><span class="net">Best viewed with Netscape Navigator</span><h1>World Wide Web</h1><p><a href="#">The World Wide Web</a> is an information system that lets documents and resources be accessed through web browsers. <a class="visited" href="#">Visited links</a> take on a familiar purple tone.</p><p>The extension keeps ordinary articles usable while adding Times New Roman text, blue underlined links, gray backgrounds, and chunky 3D borders.</p><div class="toc"><b>Contents</b><ol><li>History</li><li>Web pages</li><li>Browsers</li></ol></div><div class="construction"><span class="worker"></span> This article is under construction</div><h2>Early web style</h2><p>Simple pages used basic typography, tables, visible links, and utilitarian buttons. Retrofy Page applies the feeling without hiding the original information.</p><button>Back</button> <button>Home</button> <button>Sign guestbook</button><br><span class="counter">274903</span></div></div></section>
+  <section id="shot2" class="shot"><div class="retro-wrap"><div class="retro-body"><div class="retro-marquee">WELCOME TO MY PAGE - Best viewed in 800x600 - Sign my guestbook!</div><span class="retro-banner">Best viewed with Netscape Navigator</span><h1>World Wide Web</h1><p><a href="#">The World Wide Web</a> is an information system that lets documents and resources be accessed through web browsers. <a class="visited" href="#">Visited links</a> use the familiar purple feel where possible.</p><p>Soft 90s mode keeps ordinary pages usable while adding Times New Roman text, blue underlined links, gray backgrounds, inset/outset borders, CRT scanlines, and old-school buttons.</p><div class="toc"><b>Contents</b><ol><li>History</li><li>Web pages</li><li>Browsers</li></ol></div><div class="construction"><span class="worker"></span> UNDER CONSTRUCTION</div><h2>Early web style</h2><p>Simple pages used readable text, lists, tables, forms, visible links, and practical navigation. Retrofy Page applies that feeling after one toolbar click.</p><button>Back</button> <button>Home</button> <button>Sign guestbook</button><br><span class="counter">274903</span><div class="corner"><div class="worker"></div><div>UNDER CONSTRUCTION</div><div>Visitor #274903</div></div></div></div></section>
 
-  <section id="shot3" class="shot"><div class="retro-page chaos full"><div class="retro-shell" style="margin:30px 40px;"><div class="starbar">★ WELCOME ★ WELCOME ★ WELCOME ★ WELCOME ★ WELCOME ★</div><div class="retro-banner">WELCOME TO MY PAGE</div><span class="net">Best viewed with Netscape Navigator</span><h1>World Wide Web</h1><p><a href="#">GeoCities Chaos</a> turns the same article into a louder personal homepage: tiled-looking backgrounds, rainbow titles, and playful 90s decorations.</p><p>The content stays readable and links remain clickable, while the page gets a maximum nostalgia setting.</p><div class="construction"><span class="worker"></span> Under construction forever</div><h2>Hot links</h2><button>Guestbook</button> <button>Web ring</button> <button>Home</button><p>Visitor number <span class="counter">691204</span></p></div></div></section>
+  <section id="shot3" class="shot"><div class="retro-wrap chaos"><div class="retro-body"><div class="chaos-strip">COOL LINKS - FREE MIDI - WEB RING - EMAIL ME - HOT NEW SITE</div><div class="retro-marquee">WELCOME TO MY PAGE - Best viewed in 800x600 - Sign my guestbook!</div><span class="retro-banner">Best viewed with Netscape Navigator</span><h1>World Wide Web</h1><p><a href="#">GeoCities Chaos</a> uses the same page content but turns the style up: tiled color, rainbow headings, louder links, and extra homepage energy.</p><p>The effect is playful and intentionally intense, while the article remains readable enough to browse.</p><div class="construction"><span class="worker"></span> UNDER CONSTRUCTION FOREVER</div><h2>Hot Links</h2><button>Guestbook</button> <button>Web Ring</button> <button>Home</button><p>Visitor number <span class="counter">691204</span></p></div></div></section>
 
-  <section id="shot4" class="shot"><div class="pure"><h1>World Wide Web</h1><p><a href="#">The World Wide Web</a> is an information system that lets documents and resources be accessed through web browsers.</p><p>Pure HTML mode removes the styling drama and presents the page as a plain document with default browser typography.</p><hr><h2>Contents</h2><ol><li>History</li><li>Web pages</li><li>Browsers</li></ol><h2>History</h2><p>Early web pages were often simple documents connected by hyperlinks. They favored readable text, lists, tables, and basic forms over complex visual systems.</p><table><tr><th>Feature</th><th>Result</th></tr><tr><td>Typography</td><td>Browser defaults</td></tr><tr><td>Layout</td><td>Plain document flow</td></tr><tr><td>Links</td><td>Blue and underlined</td></tr></table><h2>Example form</h2><p><input value="Search the web"> <button>Search</button></p></div></section>
+  <section id="shot4" class="shot"><div class="pure"><h1>World Wide Web</h1><p><a href="#">The World Wide Web</a> is an information system that lets documents and resources be accessed through web browsers.</p><p>Pure HTML mode removes the extra decoration and presents the page as a plain document with browser-default typography and simple flow.</p><hr><h2>Contents</h2><ol><li>History</li><li>Web pages</li><li>Browsers</li></ol><h2>History</h2><p>Early web pages were often simple documents connected by hyperlinks. They favored readable text, lists, tables, and basic forms over complex visual systems.</p><table><tr><th>Feature</th><th>Result</th></tr><tr><td>Typography</td><td>Browser defaults</td></tr><tr><td>Layout</td><td>Plain document flow</td></tr><tr><td>Links</td><td>Blue and underlined</td></tr></table><h2>Example form</h2><p><input value="Search the web"> <button>Search</button></p></div></section>
 
-  <section id="shot5" class="shot popup-demo"><div class="retro-page full"><div class="retro-shell" style="margin:34px 42px;"><div class="retro-banner">WELCOME TO MY PAGE</div><span class="net">Best viewed with Netscape Navigator</span><h1>World Wide Web</h1><p><a href="#">Retrofy Page</a> transforms the current tab only when you ask it to, with no tracking, backend, or external calls.</p><p>The popup controls each mode and keeps removal one click away.</p><div class="construction"><span class="worker"></span> Under construction</div><h2>Article sections</h2><button>History</button> <button>Browsers</button><br><span class="counter">582016</span></div></div><aside class="popup-card"><h3>Retrofy Page</h3><p class="sub">Make the current page beautifully obsolete.</p><label for="demoMode">Mode</label><select id="demoMode"><option>Soft 90s</option><option>GeoCities Chaos</option><option>Pure HTML</option></select><button class="primary">Retrofy this page</button><button>Open Retro Browser</button><button>Windows 95 Desktop</button><button>Export as .htm</button><button disabled>Retro Browser - coming soon</button><button>Remove retro mode</button><footer><a href="#">Support the project</a></footer></aside></section>
+  <section id="shot5" class="shot" style="position:relative"><div class="retro-wrap"><div class="retro-body with-browser"><div class="browser-frame"><div class="browser-title"><span>Retro Browser 0.9</span><span><span>_</span><span>[]</span><button>X</button></span></div><div class="browser-menu">File&nbsp;&nbsp;Edit&nbsp;&nbsp;View&nbsp;&nbsp;Go&nbsp;&nbsp;Bookmarks&nbsp;&nbsp;Help</div><div class="browser-tools"><button>Back</button><button>Forward</button><button>Stop</button><button>Refresh</button><button>Home</button></div><div class="browser-address"><span>Address</span><input value="https://example.org/world-wide-web"></div><div class="browser-status">Done</div></div><div class="retro-marquee">WELCOME TO MY PAGE - Best viewed in 800x600 - Sign my guestbook!</div><span class="retro-banner">Best viewed with Netscape Navigator</span><h1>World Wide Web</h1><p><a href="#">Retrofy Page</a> transforms the current tab only after a user click. The popup stays simple, gray, and reversible.</p><p>No tracking, no backend, no external scripts.</p><div class="construction"><span class="worker"></span> UNDER CONSTRUCTION</div></div></div><aside class="popup-card"><div class="popup-head"><h3>Retrofy Page</h3><p>Make this tab look like it time-traveled from the late 1990s.</p></div><div class="mode-picker"><label>Mode</label><select><option>Soft 90s</option><option>GeoCities Chaos</option><option>Pure HTML</option></select></div><div class="popup-actions"><button>Retrofy this page</button><button>Open Retro Browser</button><button>Windows 95 Desktop</button><button>Export as .htm</button><button>Real 90s</button><button>Remove retro mode</button></div><p class="popup-status">Retro mode is on. Welcome back to the dial-up era.</p><footer><a href="#">Support the project</a></footer></aside></section>
 
   <script>
-    const params = new URLSearchParams(location.search);
-    const shot = params.get("shot") || "1";
+    const shot = new URLSearchParams(location.search).get("shot") || "1";
     document.getElementById(`shot${shot}`)?.classList.add("is-active");
   </script>
 </body>
