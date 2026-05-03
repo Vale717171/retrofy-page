@@ -6,163 +6,40 @@
   <title>Retrofy Page Small Promo Tile</title>
   <style>
     * { box-sizing: border-box; }
-    html, body {
-      width: 440px;
-      height: 280px;
-      margin: 0;
-      overflow: hidden;
-      background: #c0c0c0;
-      color: #000;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      padding: 14px;
-      background:
-        repeating-linear-gradient(45deg, rgba(255,255,255,.28) 0 8px, rgba(0,0,0,.06) 8px 16px),
-        #c0c0c0;
-    }
-
-    .tile {
-      width: 412px;
-      height: 252px;
-      border: 4px outset #f2f2f2;
-      background: #e7e7e7;
-      padding: 13px;
-      position: relative;
-    }
-
-    .topbar {
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 8px;
-      background: #000080;
-      color: #fff;
-      border: 2px inset #d8d8d8;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .buttons span {
-      display: inline-flex;
-      width: 16px;
-      height: 16px;
-      align-items: center;
-      justify-content: center;
-      margin-left: 3px;
-      border: 2px outset #fff;
-      background: #c0c0c0;
-      color: #000;
-      font-size: 10px;
-      line-height: 1;
-    }
-
-    .content {
-      display: grid;
-      grid-template-columns: 1fr 122px;
-      gap: 13px;
-      padding-top: 13px;
-    }
-
-    h1 {
-      margin: 0 0 8px;
-      font: 700 39px/0.95 "Times New Roman", Times, serif;
-      color: #800080;
-      text-shadow: 1px 1px #fff;
-    }
-
-    .tagline {
-      margin: 0 0 12px;
-      font: 700 18px/1.15 Arial, Helvetica, sans-serif;
-      color: #000080;
-    }
-
-    .linkline {
-      font: 15px "Times New Roman", Times, serif;
-      color: #00e;
-      text-decoration: underline;
-      margin-bottom: 11px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 5px 8px;
-      border: 3px outset #fff;
-      background: #ff0;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .preview {
-      border: 3px inset #fff;
-      background: #fff;
-      height: 156px;
-      padding: 8px;
-      font-family: "Times New Roman", Times, serif;
-      overflow: hidden;
-    }
-
-    .preview-title {
-      margin: 0 0 6px;
-      color: #800080;
-      font-size: 20px;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .marquee {
-      background: #000080;
-      color: #ff0;
-      border: 2px outset #fff;
-      padding: 3px;
-      font: 700 10px Arial, Helvetica, sans-serif;
-      white-space: nowrap;
-      margin-bottom: 8px;
-    }
-
-    .fake-text {
-      height: 7px;
-      margin: 5px 0;
-      background: #777;
-    }
-
-    .fake-text.short { width: 66%; }
-    .fake-text.link { width: 78%; background: #00e; }
-
-    .counter {
-      display: inline-block;
-      margin-top: 7px;
-      padding: 3px 5px;
-      background: #000;
-      color: #39ff14;
-      border: 2px inset #777;
-      font: 700 13px "Courier New", monospace;
-    }
+    html, body { width: 440px; height: 280px; margin: 0; overflow: hidden; }
+    body { padding: 14px; background: #bfbfbf; color: #111; font-family: Arial, Helvetica, sans-serif; }
+    .tile { width: 412px; height: 252px; display: grid; grid-template-columns: 178px 1fr; gap: 12px; padding: 12px; border: 2px outset #f1f1f1; background: #cfcfcf; }
+    .brand { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+    h1 { margin: 0 0 10px; font: 700 40px/0.96 "Times New Roman", Times, serif; color: #000; }
+    .copy { margin: 0 0 12px; font: 700 17px/1.22 Arial, Helvetica, sans-serif; color: #111; }
+    .link { color: #00e; text-decoration: underline; font: 16px "Times New Roman", Times, serif; }
+    .badge { display: inline-block; width: fit-content; margin-top: 12px; padding: 5px 7px; border: 2px outset #fff; background: #ffffcc; font: 700 11px Arial, Helvetica, sans-serif; }
+    .popup { padding: 8px; border: 2px outset #f1f1f1; background: #cfcfcf; overflow: hidden; }
+    .head { margin-bottom: 7px; padding: 7px; border: 2px inset #f1f1f1; background: #eee; }
+    .head h2 { margin: 0 0 3px; font: 700 20px/1.05 "Times New Roman", Times, serif; }
+    .head p { margin: 0; font-size: 10px; line-height: 1.22; }
+    .mode { display: grid; grid-template-columns: auto 1fr; gap: 6px; align-items: center; margin-bottom: 7px; padding: 5px; border: 2px inset #f1f1f1; background: #eee; font-size: 10px; font-weight: 700; }
+    .select { height: 23px; padding: 4px; border: 2px inset #fff; background: #fff; font-weight: 400; }
+    .buttons { display: grid; gap: 5px; }
+    .button { height: 27px; display: flex; align-items: center; justify-content: center; border: 2px outset #fff; background: #e2e2e2; font-size: 11px; font-weight: 700; }
   </style>
 </head>
 <body>
   <main class="tile">
-    <div class="topbar">
-      <span>Retrofy Page</span>
-      <span class="buttons"><span>_</span><span>[]</span><span>X</span></span>
-    </div>
-    <section class="content">
-      <div>
-        <h1>Retrofy<br>Page</h1>
-        <p class="tagline">Make any webpage beautifully obsolete.</p>
-        <div class="linkline">Soft 90s · GeoCities Chaos · Pure HTML</div>
-        <span class="badge">Best viewed in 800x600</span>
-      </div>
-      <div class="preview">
-        <div class="marquee">WELCOME TO MY PAGE</div>
-        <div class="preview-title">Article</div>
-        <div class="fake-text link"></div>
-        <div class="fake-text"></div>
-        <div class="fake-text short"></div>
-        <div class="fake-text"></div>
-        <span class="counter">042069</span>
+    <section class="brand">
+      <h1>Retrofy<br>Page</h1>
+      <p class="copy">Make any tab look like it time-traveled from the late 1990s.</p>
+      <span class="link">No tracking. No backend.</span>
+      <span class="badge">Best viewed in 800x600</span>
+    </section>
+    <section class="popup">
+      <div class="head"><h2>Retrofy Page</h2><p>Make this tab look like it time-traveled from the late 1990s.</p></div>
+      <div class="mode"><span>Mode</span><span class="select">Soft 90s</span></div>
+      <div class="buttons">
+        <span class="button">Retrofy this page</span>
+        <span class="button">Open Retro Browser</span>
+        <span class="button">Windows 95 Desktop</span>
+        <span class="button">Real 90s</span>
       </div>
     </section>
   </main>
